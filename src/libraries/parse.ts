@@ -25,7 +25,7 @@ export async function parseRegion() {
       .split("\n")
       .find((data) => {
         if (data.length !== 6 && data.length !== 0) {
-          regionArray.push(data);
+          regionArray.push(data.trim());
         }
       });
 
@@ -60,7 +60,7 @@ export async function parseUrl() {
       const href = data.attribs.href.split("=");
       const link = href[href.length - 1];
 
-      urlArray.push("https://www.daangn.com" + link);
+      urlArray.push("https://www.daangn.com" + link.trim());
     });
 
     Logger.info(`[URL_SCRAPER] Found ${urlArray.length}`);
@@ -98,7 +98,7 @@ export async function parseCategory() {
       }
 
       // Logger.info(`[CATERGORY] ${category}`);
-      categoryArray.push(category);
+      categoryArray.push(category.trim());
     }
 
     Logger.info(`[CATEGORY_SCRAPER] Found Categories: ${categoryArray.length}`);
