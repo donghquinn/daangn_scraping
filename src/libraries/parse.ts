@@ -32,7 +32,6 @@ export async function parseRegion() {
       });
 
     Logger.info(`[REGION_SCRPAER] FOUND Regions: ${regionArray.length}`);
-
     // console.log(regionArray);
 
     return regionArray;
