@@ -10,7 +10,7 @@ export async function parseRegion() {
   const html = await getHtml();
 
   if (!html) {
-    return console.log("No Html");
+    throw new Error("No Html");
   }
 
   try {
