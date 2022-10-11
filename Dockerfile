@@ -13,4 +13,4 @@ RUN apk --no-cache add tzdata && \
 
 RUN mkdir -p /app/logs
 
-CMD ["npm", "dev"]
+CMD ["npm","run","dev"]
