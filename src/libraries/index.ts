@@ -1,5 +1,5 @@
 import { insertUrlAndRegion } from "queries/insertQueryData";
-import { Logger } from "utils/logger.utils";
+import { Logger } from "utils";
 import { Mysql } from "./database/Mysql.lib";
 import { parseCategory, parseRegion, parseUrl } from "./parse";
 
@@ -28,8 +28,8 @@ export class Scraping {
     Logger.info("[SCRAPER] Scraping Start: " + Date());
 
     setInterval(async () => {
-      const region = await parseRegion();
       const url = await parseUrl();
+      const region = await parseRegion();
       const category = await parseCategory();
 
       if (!region) {

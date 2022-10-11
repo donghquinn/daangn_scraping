@@ -1,8 +1,9 @@
 import { getHtml } from "./getHtml";
 import { text, load } from "cheerio";
-import { Logger } from "utils/logger.utils";
+import { Logger } from "utils";
 import axios from "axios";
 
+// 지역 정보 스크레이핑
 export async function parseRegion() {
   const regionArray: Array<string> = [];
 
@@ -23,10 +24,13 @@ export async function parseRegion() {
       .text()
       .split("\n")
       .find((data) => {
-        regionArray.push(data);
+        if (data.length !== 6 && data.length !== 0) {
+          regionArray.push(data);
+        }
       });
 
     Logger.info(`[REGION_SCRPAER] FOUND Regions: ${regionArray.length}`);
+
     // console.log(regionArray);
 
     return regionArray;
@@ -37,13 +41,14 @@ export async function parseRegion() {
   }
 }
 
+// URL 정보 스크레이핑
 export async function parseUrl() {
   let urlArray: Array<string> = [];
 
   const html = await getHtml();
 
   if (!html) {
-    return console.log("No Html");
+    throw new Error("No Html");
   }
 
   try {
@@ -68,6 +73,7 @@ export async function parseUrl() {
   }
 }
 
+// 카테고리 정보 스크레이핑
 export async function parseCategory() {
   const categoryArray: Array<string> = [];
 
@@ -84,6 +90,8 @@ export async function parseCategory() {
       const $ = load(html.data);
 
       const category = $("p[id='article-category']").text().split("∙")[0];
+
+      // Logger.info(`${category}`);
 
       if (!category) {
         Logger.debug("[CATEGORY] No Category Found");

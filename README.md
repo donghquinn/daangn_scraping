@@ -21,6 +21,7 @@
 - DB_USER: DB 유저 이름
 - TABLE: 스크레이핑 한 데이터 저장 테이블 이름
 - NODE_ENV: 구동 환경 ( development | production)
+- TIME_SET: 데이터를 스크레이핑 할 주기 선택
 
 ## 구동 명령
 
