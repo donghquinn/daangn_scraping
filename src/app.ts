@@ -1,3 +1,4 @@
-import { parseHtml } from "./libraries/parse";
+import { parseRegion, parseUrl } from "./libraries/parse";
 
-await parseHtml();
+await parseRegion();
+await parseUrl();
