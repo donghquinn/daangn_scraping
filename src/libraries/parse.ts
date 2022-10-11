@@ -25,8 +25,8 @@ export async function parseRegion() {
       regionArray.push(data);
     });
 
-  Logger.info(regionArray);
-  console.log(regionArray);
+  Logger.info(`[REGION_SCRPAER] FOUND Regions: ${regionArray.length}`);
+  // console.log(regionArray);
 
   return regionArray;
 }
@@ -82,11 +82,11 @@ export async function parseCategory() {
       Logger.debug("[CATEGORY] No Category Found");
     }
 
-    Logger.info("[CATEGORY] Category Found");
-
-    Logger.info(`[CATERGORY] ${category}`);
+    // Logger.info(`[CATERGORY] ${category}`);
     categoryArray.push(category);
   }
+
+  Logger.info(`[CATEGORY_SCRAPER] Found Categories: ${categoryArray.length}`);
 
   return categoryArray;
 }

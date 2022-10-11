@@ -25,7 +25,7 @@ export class Scraping {
       Logger.info("[Scraper] Is Not Listening");
     }
 
-    Logger.info("[SCRAPER] Scraping Start." + Date());
+    Logger.info("[SCRAPER] Scraping Start: " + Date());
 
     setInterval(async () => {
       const region = await parseRegion();
@@ -33,20 +33,23 @@ export class Scraping {
       const category = await parseCategory();
 
       if (!region) {
-        throw new Error("Could not Scrape Region Data");
+        throw new Error("[SCRAPER] Could not Scrape Region Data");
       }
 
       if (!url) {
-        throw new Error("Could not Scrape Url Data");
+        throw new Error("[SCRAPER] Could not Scrape Url Data");
       }
 
-      if (region.length !== url.length) {
-        throw new Error("Total Is not matched");
+      if (!category) {
+        throw new Error("[SCRAPER] Could Not Scrape Category Data");
       }
 
+      // if (region.length !== url.length) {
+      //   throw new Error("Total Is not matched");
+      // }
       for (let i = 0; i < url.length - 1; i += 1) {
         await Mysql.query(insertUrlAndRegion, [region[i], url[i], category[i]]);
       }
-    }, 60000);
+    }, 600000);
   }
 }
