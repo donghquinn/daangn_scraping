@@ -12,6 +12,16 @@
 
 60분(한 시간)에 한 번씩 데이터를 fetch 하여 파싱 후 DB에 저장
 
+## 환경변수 설명
+
+- DB_HOST= DB 서버 주소
+- DB_PORT= DB 서버 포트
+- DB_NAME= 데이터베이스 이름
+- DB_PASS= DB 유저 비밀번호
+- DB_USER: DB 유저 이름
+- TABLE: 스크레이핑 한 데이터 저장 테이블 이름
+- NODE_ENV: 구동 환경 ( development | production)
+
 ## 구동 명령
 
 npm run dev
