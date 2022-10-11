@@ -10,6 +10,8 @@ services:
       - 7000:7000
     env_file:
       - ./.scrape.env
+    volumes:
+      - ./scrape-logs:/app/src/logs
     networks:
       - proxy
       - wordpress

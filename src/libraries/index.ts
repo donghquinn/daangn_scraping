@@ -50,6 +50,6 @@ export class Scraping {
       for (let i = 0; i < url.length - 1; i += 1) {
         await Mysql.query(insertUrlAndRegion, [region[i], url[i], category[i]]);
       }
-    }, 600000);
+    }, Number(process.env.TIME_SET));
   }
 }
