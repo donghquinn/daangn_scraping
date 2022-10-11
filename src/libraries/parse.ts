@@ -84,7 +84,7 @@ export async function parseCategory() {
 
     Logger.info("[CATEGORY] Category Found");
 
-    // Logger.info(`[CATERGORY] ${category}`);
+    Logger.info(`[CATERGORY] ${category}`);
     categoryArray.push(category);
   }
 
