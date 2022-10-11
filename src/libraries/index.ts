@@ -1,7 +1,7 @@
 import { insertUrlAndRegion } from "queries/insertQueryData";
 import { Logger } from "utils/logger.utils";
 import { Mysql } from "./database/Mysql.lib";
-import { parseRegion, parseUrl } from "./parse";
+import { parseCategory, parseRegion, parseUrl } from "./parse";
 
 export class Scraping {
   private static instance: Scraping;
@@ -27,6 +27,7 @@ export class Scraping {
 
     const region = await parseRegion();
     const url = await parseUrl();
+    const category = await parseCategory();
 
     if (!region) {
       throw new Error("Could not Scrape Region Data");
@@ -41,7 +42,7 @@ export class Scraping {
     }
 
     for (let i = 0; i < url.length - 1; i += 1) {
-      await Mysql.query(insertUrlAndRegion, [region[i], url[i]]);
+      await Mysql.query(insertUrlAndRegion, [region[i], url[i], category[i]]);
     }
   }
 }
