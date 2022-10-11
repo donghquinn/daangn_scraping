@@ -25,7 +25,9 @@ export async function parseRegion() {
       .split("\n")
       .find((data) => {
         if (data.length !== 6 && data.length !== 0) {
-          regionArray.push(data.trim());
+          const regionData = data.trim();
+
+          regionArray.push(regionData);
         }
       });
 
@@ -60,7 +62,9 @@ export async function parseUrl() {
       const href = data.attribs.href.split("=");
       const link = href[href.length - 1];
 
-      urlArray.push("https://www.daangn.com" + link.trim());
+      const uri = "https://www.daangn.com" + link.trim();
+
+      urlArray.push(uri);
     });
 
     Logger.info(`[URL_SCRAPER] Found ${urlArray.length}`);
@@ -97,8 +101,10 @@ export async function parseCategory() {
         Logger.debug("[CATEGORY] No Category Found");
       }
 
+      const categoryData = category.trim();
+
       // Logger.info(`[CATERGORY] ${category}`);
-      categoryArray.push(category.trim());
+      categoryArray.push(categoryData);
     }
 
     Logger.info(`[CATEGORY_SCRAPER] Found Categories: ${categoryArray.length}`);
