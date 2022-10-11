@@ -17,6 +17,7 @@ export class Mysql {
   // DB 연결
   private constructor() {
     this.isListening = true;
+
     this.pool = createPool({
       host: process.env.DB_HOST,
       port: Number(process.env.DB_PORT),

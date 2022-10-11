@@ -12,23 +12,29 @@ export async function parseRegion() {
     return console.log("No Html");
   }
 
-  const $ = load(html.data);
-  const $bodyList = $(".card-desc");
+  try {
+    const $ = load(html.data);
+    const $bodyList = $(".card-desc");
 
-  // .children("article.card-top")
-  // .children("card-desc");
-  const region = $bodyList
-    .children("div.card-region-name")
-    .text()
-    .split("\n")
-    .find((data) => {
-      regionArray.push(data);
-    });
+    // .children("article.card-top")
+    // .children("card-desc");
+    const region = $bodyList
+      .children("div.card-region-name")
+      .text()
+      .split("\n")
+      .find((data) => {
+        regionArray.push(data);
+      });
 
-  Logger.info(`[REGION_SCRPAER] FOUND Regions: ${regionArray.length}`);
-  // console.log(regionArray);
+    Logger.info(`[REGION_SCRPAER] FOUND Regions: ${regionArray.length}`);
+    // console.log(regionArray);
 
-  return regionArray;
+    return regionArray;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`[REGION_SCRAPER] Scraping Error :${error.message}`);
+    }
+  }
 }
 
 export async function parseUrl() {
@@ -57,7 +63,7 @@ export async function parseUrl() {
     return urlArray;
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error("URL_SCRAPING FAILED");
+      throw new Error(`[URL_SCRAPER] URL Scraping Error: ${error.message}`);
     }
   }
 }
@@ -71,24 +77,32 @@ export async function parseCategory() {
     throw new Error("[CATEGORY] No Url Found Here. Ignored");
   }
 
-  for (let i = 0; i < url.length - 1; i += 1) {
-    const html = await axios.get(url[i]);
+  try {
+    for (let i = 0; i < url.length - 1; i += 1) {
+      const html = await axios.get(url[i]);
 
-    const $ = load(html.data);
+      const $ = load(html.data);
 
-    const category = $("p[id='article-category']").text().split("∙")[0];
+      const category = $("p[id='article-category']").text().split("∙")[0];
 
-    if (!category) {
-      Logger.debug("[CATEGORY] No Category Found");
+      if (!category) {
+        Logger.debug("[CATEGORY] No Category Found");
+      }
+
+      // Logger.info(`[CATERGORY] ${category}`);
+      categoryArray.push(category);
     }
 
-    // Logger.info(`[CATERGORY] ${category}`);
-    categoryArray.push(category);
+    Logger.info(`[CATEGORY_SCRAPER] Found Categories: ${categoryArray.length}`);
+
+    return categoryArray;
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(
+        `[CATEGORY_SCRAPER] Category Scraping Error: ${error.message}`
+      );
+    }
   }
-
-  Logger.info(`[CATEGORY_SCRAPER] Found Categories: ${categoryArray.length}`);
-
-  return categoryArray;
 }
 
 // const category = url.find(async (uri) => {
