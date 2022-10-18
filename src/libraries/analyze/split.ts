@@ -25,9 +25,9 @@ export class DataAnalyze {
 
   public async getAllData() {
     try {
-      console.log("hi 0");
+      // console.log("hi 0");
 
-      const { count } = await this.getTotalCount();
+      // const { count } = await this.getTotalCount();
 
       console.log("hi 1");
 
@@ -63,6 +63,10 @@ export class DataAnalyze {
           item.category, item.region, item.updated.split(" ")[1];
         }),
       };
+
+      if (!resResult || resResult === undefined) {
+        throw new MysqlError("[DATA_QUERY]", "NO DATA FOUND", "Mysql");
+      }
 
       return Logger.info("[DATA_QUERY] data %o", resResult);
     } catch (error) {
