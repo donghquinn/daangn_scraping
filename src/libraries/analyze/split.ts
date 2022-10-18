@@ -19,21 +19,31 @@ export class DataAnalyze {
 
   public async getAllData() {
     try {
-      const totalData = await this.getTotalCount();
+      const totalCount = await this.getTotalCount();
 
       const result = await Mysql.query<GetCombined[]>(selectCombined);
 
       Logger.info("[DATA_QUERY] Found Data");
 
- 
+      const resResult = result.find((item) => {
+        const res = {
+          region: item.region,
+          category: item.category,
+          updatedDate: item.updated,
+        };
 
-      // const date = this.splitDate(result.updated);
+        Logger.info("[DATE_QUERY] FOUND Combined Data");
 
-      for (let i =0; i <= result.length -1; i+=1 ) {
-        const resRsult = 
+        return { totalCount, res };
+      });
+
+      if (!resResult) {
+        throw new MysqlError(
+          "[DATA_QUERY]",
+          "No Combined Data Found",
+          "Ignore"
+        );
       }
-
-      return result;
     } catch (error) {
       if (error instanceof MysqlError) {
         throw new MysqlError("[DATA_QUERY]", "MYSQL ERROR", "Query error");
