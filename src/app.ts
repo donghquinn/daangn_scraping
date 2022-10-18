@@ -1,8 +1,10 @@
 import { Scraping } from "libraries";
-import { parseCategory, parseRegion, parseUrl } from "./libraries/parse";
+import { KoaRouter } from "server";
 
 // await parseRegion();
 // // await parseUrl();
 const scrape = Scraping.getInstance();
+const server = new KoaRouter();
 
+server.start();
 scrape.start();
