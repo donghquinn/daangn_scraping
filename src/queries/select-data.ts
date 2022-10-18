@@ -12,8 +12,6 @@ SELECT
   category, region, updated
 FROM
   ${process.env.TABLE}
-ORDER BY
-  updated
 `;
 
 export const selectCategories: Sql = `
@@ -21,8 +19,6 @@ SELECT
   category, updated
 FROM
   ${process.env.TABLE}
-ORDER BY
-  updated
 `;
 
 export const selectRegion: Sql = `
@@ -30,6 +26,4 @@ SELECT
   region, updated
 FROM
   ${process.env.TABLE}
-ORDER BY
-  updated
 `;
