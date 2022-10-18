@@ -41,11 +41,11 @@ export class DataAnalyze {
 
   public async getTotalCount() {
     try {
-      const { count } = await Mysql.query<TotalCounts>(selectTotalCount);
+      const counts = await Mysql.query<TotalCounts>(selectTotalCount);
 
-      Logger.info(`[DATA_QUERY] Total Count: ${count}`);
+      Logger.info(`[DATA_QUERY] Total Count: ${counts}`);
 
-      return { totalCount: count };
+      return counts;
     } catch (error) {
       throw new Error("[DATA_QUERY] Error!");
     }
