@@ -4,6 +4,8 @@ import { selectCombined, selectTotalCount } from "queries/select-data";
 import { GetCombined, TotalCounts } from "types/sql.types";
 import { Logger } from "utils";
 
+// TODO 카테고리, 지역 이름 데이터 뽑아와서 해당 타입 가드하고
+// TODO find() 함수로 item.region = "동작구" 식으로 아이템 뽑아와서 총 개수
 export class DataAnalyze {
   private static instance: DataAnalyze;
 
@@ -19,18 +21,17 @@ export class DataAnalyze {
     try {
       const totalData = await this.getTotalCount();
 
-      const result = await Mysql.query<GetCombined>(selectCombined);
+      const result = await Mysql.query<GetCombined[]>(selectCombined);
 
       Logger.info("[DATA_QUERY] Found Data");
 
-      const date = this.splitDate(result.updated).find((item) => {});
+ 
 
-      const resData = {
-        totalData,
-        region: result.region,
-        category: result.category,
-        date,
-      };
+      // const date = this.splitDate(result.updated);
+
+      for (let i =0; i <= result.length -1; i+=1 ) {
+        const resRsult = 
+      }
 
       return result;
     } catch (error) {
