@@ -45,7 +45,7 @@ export class DataAnalyze {
 
       Logger.info(`[DATA_QUERY] Total Count: ${count}`);
 
-      return count;
+      return { totalCount: count };
     } catch (error) {
       throw new Error("[DATA_QUERY] Error!");
     }
