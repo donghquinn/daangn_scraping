@@ -25,6 +25,14 @@ export class DataAnalyze {
 
       Logger.info("[DATA_QUERY] Found Data");
 
+      if (!result || result.length === 0) {
+        throw new MysqlError(
+          "[DATA_QUERY]",
+          "COMBINED DATA NOT FOUND",
+          "No result"
+        );
+      }
+
       const resResult = {
         totalCount,
         data: result.map((item) => {
