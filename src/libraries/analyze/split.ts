@@ -18,7 +18,7 @@ export class DataAnalyze {
     try {
       const totalData = await this.getTotalCount();
 
-      const { region, category, updated } = await Mysql.query<GetCombined>(
+      const { category, region, updated } = await Mysql.query<GetCombined>(
         selectCombined
       );
 
@@ -26,20 +26,20 @@ export class DataAnalyze {
 
       const date = this.splitDate(updated);
 
-      return {
-        totalCounts: totalData,
-        data: {
-          region,
-          category,
-          date,
-        },
-      };
+      // return {
+      //   totalCounts: totalData,
+      //   data: {
+      //     region,
+      //     category,
+      //     date,
+      //   },
+      // };
     } catch (error) {
       throw new Error("[DATA_QUERY] Error!");
     }
   }
 
-  private async getTotalCount() {
+  async getTotalCount() {
     try {
       const { count } = await Mysql.query<TotalCounts>(selectTotalCount);
 
