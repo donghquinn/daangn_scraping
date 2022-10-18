@@ -31,7 +31,7 @@ export class DataAnalyze {
           return {
             region: item.region,
             category: item.category,
-            date: item.updated.split(" "),
+            date: item.updated.split(" ")[1],
           };
         }),
       };
