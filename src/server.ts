@@ -7,8 +7,6 @@ import { Logger } from "utils";
 import { routerV1 } from "router";
 
 export class KoaRouter {
-  private static instance: KoaRouter;
-
   private port: number;
 
   private server: Server | null;
@@ -32,7 +30,7 @@ export class KoaRouter {
   }
 
   start() {
-    if (this.server === undefined) {
+    if (!this.server) {
       this.attachMiddleWare();
 
       this.server = this.koa.listen(this.port, () => {
