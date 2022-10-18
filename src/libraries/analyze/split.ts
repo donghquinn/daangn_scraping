@@ -9,11 +9,11 @@ import { Logger } from "utils";
 export class DataAnalyze {
   private static instance: DataAnalyze;
 
-  private resultArray: Array<GetCombined>;
+  // private resultArray: Array<GetCombined>;
 
-  constructor() {
-    this.resultArray = [];
-  }
+  // constructor() {
+  //   this.resultArray = [];
+  // }
 
   public static getInstance() {
     if (!this.instance) {
@@ -33,8 +33,6 @@ export class DataAnalyze {
 
       const result = await Mysql.query<GetCombined[]>(selectCombined);
 
-      const [{ region }] = result;
-
       console.log("hi 2");
 
       Logger.info("[DATA_QUERY] Found Data");
@@ -47,7 +45,7 @@ export class DataAnalyze {
         );
       }
 
-      this.resultArray.push(...result);
+      // this.resultArray.push(...result);
 
       console.log("hi 3");
 
@@ -62,14 +60,9 @@ export class DataAnalyze {
       // }
 
       return Logger.info("[DATA_QUERY] data %o", {
-        counts: count,
-        data: {
-          region: this.resultArray.find((item) => {
-            item.region;
-          }),
-          category: this.resultArray.find((item) => item.category),
-          updated: this.resultArray.find((item) => item.updated.split(" ")[1]),
-        },
+        data: result.find((item) => {
+          item.category, item.region, item.updated.split(" ")[1];
+        }),
       });
     } catch (error) {
       if (error instanceof MysqlError) {
