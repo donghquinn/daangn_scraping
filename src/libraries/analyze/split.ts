@@ -1,3 +1,4 @@
+import { MysqlError } from "error/mysql.error";
 import { Mysql } from "libraries/database";
 import { selectCombined, selectTotalCount } from "queries/select-data";
 import { GetCombined, TotalCounts } from "types/sql.types";
@@ -33,7 +34,19 @@ export class DataAnalyze {
 
       return result;
     } catch (error) {
-      throw new Error("[DATA_QUERY] Error!");
+      if (error instanceof MysqlError) {
+        throw new MysqlError("[DATA_QUERY]", "MYSQL ERROR", "Query error");
+      }
+
+      if (error instanceof Error) {
+        throw new MysqlError("[DATA_QUERY]", "NOT MYSQL ERROR", "Query error");
+      }
+
+      throw new MysqlError(
+        "[DATA_QUERY]",
+        "NOT MYSQL Error",
+        JSON.stringify(error)
+      );
     }
   }
 
@@ -45,7 +58,19 @@ export class DataAnalyze {
 
       return counts;
     } catch (error) {
-      throw new Error("[DATA_QUERY] Error!");
+      if (error instanceof MysqlError) {
+        throw new MysqlError("[DATA_QUERY]", "MYSQL ERROR", "Query error");
+      }
+
+      if (error instanceof Error) {
+        throw new MysqlError("[DATA_QUERY]", "NOT MYSQL ERROR", "Query error");
+      }
+
+      throw new MysqlError(
+        "[DATA_QUERY]",
+        "NOT MYSQL Error",
+        JSON.stringify(error)
+      );
     }
   }
 
