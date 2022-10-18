@@ -2,7 +2,7 @@ import { Sql } from "types/sql.types";
 
 export const selectTotalCount: Sql = `
 SELECT
-  COUNT(*)
+  COUNT(*) as count
 FROM
   ${process.env.TABLE}
 `;
