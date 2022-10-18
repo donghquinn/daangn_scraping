@@ -22,14 +22,16 @@ export class DataAnalyze {
 
       Logger.info("[DATA_QUERY] Found Data");
 
-      const date = this.splitDate(result.updated);
+      const date = this.splitDate(result.updated).find((item) => {});
 
-      return {
+      const resData = {
         totalData,
         region: result.region,
         category: result.category,
         date,
       };
+
+      return result;
     } catch (error) {
       throw new Error("[DATA_QUERY] Error!");
     }
