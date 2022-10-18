@@ -4,7 +4,7 @@ import { DataAnalyze } from "libraries/analyze/split";
 
 const { getAllData, getTotalCount } = DataAnalyze.getInstance();
 
-const dataRouter = new Router();
+const dataRouter = new Router<Record<string, never>>();
 
 dataRouter.get("/data", async (ctx, next: Next) => {
   ctx.body = await getAllData();
