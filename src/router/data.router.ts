@@ -7,7 +7,15 @@ const { getAllData, getTotalCount } = DataAnalyze.getInstance();
 const dataRouter = new Router<Record<string, never>>();
 
 dataRouter.get("/data", async (ctx, next: Next) => {
-  ctx.body = await getAllData();
+  const res = await getAllData();
+  ctx.body = {
+    totalCounts: res.totalData,
+    data: {
+      region: res.region,
+      category: res.category,
+      updated: res.date,
+    },
+  };
 
   await next();
 });

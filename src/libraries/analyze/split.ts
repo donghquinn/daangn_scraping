@@ -25,12 +25,10 @@ export class DataAnalyze {
       const date = this.splitDate(result.updated);
 
       return {
-        totalCounts: totalData.count,
-        data: {
-          category: result.category,
-          region: result.region,
-          date,
-        },
+        totalData,
+        region: result.region,
+        category: result.category,
+        date,
       };
     } catch (error) {
       throw new Error("[DATA_QUERY] Error!");
