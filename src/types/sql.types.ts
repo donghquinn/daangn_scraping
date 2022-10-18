@@ -15,7 +15,8 @@ export interface GetCategory extends DefaultQuery {
   category: string;
 }
 
-export interface GetCombined extends DefaultQuery {
+export interface GetCombined {
   region: string;
   category: string;
+  updated: string;
 }
