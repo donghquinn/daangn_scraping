@@ -25,28 +25,28 @@ export class DataAnalyze {
 
       Logger.info("[DATA_QUERY] Found Data");
 
-      const region = result.map((item) => item.region);
-      const category = result.map((item) => item.category);
-      const updated = result.map((item) => item.updated.split(" "));
+      const resResult = {
+        totalCount,
+        data: result.map((item) => {
+          return {
+            region: item.region,
+            category: item.category,
+            date: item.updated.split(" "),
+          };
+        }),
+      };
 
       Logger.info("[DATE_QUERY] FOUND Combined Data");
 
-      if (!region || !category || !updated) {
-        throw new MysqlError(
-          "[DATA_QUERY]",
-          "No Combined Data Found",
-          "Ignore"
-        );
-      }
+      // if (!region || !category || !updated) {
+      //   throw new MysqlError(
+      //     "[DATA_QUERY]",
+      //     "No Combined Data Found",
+      //     "Ignore"
+      //   );
+      // }
 
-      return {
-        totalCount,
-        date: {
-          region,
-          category,
-          updated,
-        },
-      };
+      return resResult;
     } catch (error) {
       if (error instanceof MysqlError) {
         throw new MysqlError("[DATA_QUERY]", "MYSQL ERROR", "Query error");
