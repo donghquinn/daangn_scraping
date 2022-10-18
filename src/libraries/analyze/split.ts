@@ -29,11 +29,11 @@ export class DataAnalyze {
 
       // const { count } = await this.getTotalCount();
 
-      const result = await Mysql.query<GetCombined[]>(selectCombined);
+      const [...result] = await Mysql.query<GetCombined[]>(selectCombined);
 
       Logger.info("[DATA_QUERY] Found Data");
 
-      if (!result || result.length === 0) {
+      if (!result) {
         throw new MysqlError(
           "[DATA_QUERY]",
           "COMBINED DATA NOT FOUND",
@@ -52,15 +52,15 @@ export class DataAnalyze {
       //     "Ignore"
       //   );
       // }
-      const resResult = {
-        data: result.find((item) => {
-          item.category, item.region, item.updated.split(" ")[1];
-        }),
-      };
 
-      if (!resResult.data || resResult.data === undefined) {
-        throw new MysqlError("[DATA_QUERY]", "NO DATA FOUND", "Mysql");
-      }
+      const resResult = {
+        category: result
+          .map((item) => {
+            item.category;
+          })
+          .toString(),
+        region: result.map((item) => item.region).toString(),
+      };
 
       Logger.info("[DATA_QUERY] data %o", resResult);
     } catch (error) {
