@@ -80,11 +80,11 @@ export class DataAnalyze {
 
   public async getTotalCount() {
     try {
-      const counts = await Mysql.query<TotalCounts>(selectTotalCount);
+      const { count } = await Mysql.query<TotalCounts>(selectTotalCount);
 
-      Logger.info("[DATA_QUERY] Total Count, %o", counts.count);
+      Logger.info("[DATA_QUERY] Total Count, %o", count);
 
-      return counts;
+      return count;
     } catch (error) {
       if (error instanceof MysqlError) {
         throw new MysqlError("[DATA_QUERY]", "MYSQL ERROR", "Query error");
