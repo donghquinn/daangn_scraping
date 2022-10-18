@@ -18,22 +18,20 @@ export class DataAnalyze {
     try {
       const totalData = await this.getTotalCount();
 
-      const { category, region, updated } = await Mysql.query<GetCombined>(
-        selectCombined
-      );
+      const result = await Mysql.query<GetCombined>(selectCombined);
 
       Logger.info("[DATA_QUERY] Found Data");
 
-      const date = this.splitDate(updated);
+      const date = this.splitDate(result.updated);
 
-      // return {
-      //   totalCounts: totalData,
-      //   data: {
-      //     region,
-      //     category,
-      //     date,
-      //   },
-      // };
+      return {
+        totalCounts: totalData.count,
+        data: {
+          category: result.category,
+          region: result.region,
+          date,
+        },
+      };
     } catch (error) {
       throw new Error("[DATA_QUERY] Error!");
     }
@@ -43,7 +41,7 @@ export class DataAnalyze {
     try {
       const counts = await Mysql.query<TotalCounts>(selectTotalCount);
 
-      Logger.info(`[DATA_QUERY] Total Count: ${counts}`);
+      Logger.info(`[DATA_QUERY] Total Count: ${counts.count}`);
 
       return counts;
     } catch (error) {
@@ -51,7 +49,7 @@ export class DataAnalyze {
     }
   }
 
-  splitDate(updated: string) {
+  private splitDate(updated: string) {
     const date = updated.split(" ");
 
     Logger.info(`date Split`);
