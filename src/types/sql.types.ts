@@ -5,7 +5,7 @@ export interface DefaultQuery {
 }
 
 export interface TotalCounts {
-  count: string;
+  count: Number;
 }
 export interface GetRegion extends DefaultQuery {
   region: string;
