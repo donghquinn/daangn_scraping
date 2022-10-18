@@ -68,7 +68,7 @@ export class DataAnalyze {
         throw new MysqlError("[DATA_QUERY]", "NO DATA FOUND", "Mysql");
       }
 
-      return Logger.info("[DATA_QUERY] data %o", resResult);
+      Logger.info("[DATA_QUERY] data %o", resResult);
     } catch (error) {
       if (error instanceof MysqlError) {
         throw new MysqlError("[DATA_QUERY]", "MYSQL ERROR", "Query error");
