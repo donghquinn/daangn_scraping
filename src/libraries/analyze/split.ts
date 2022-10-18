@@ -45,22 +45,33 @@ export class DataAnalyze {
 
       Logger.info("[DATE_QUERY] FOUND Combined Data");
 
-      // if (!region || !category || !updated) {
-      //   throw new MysqlError(
-      //     "[DATA_QUERY]",
-      //     "No Combined Data Found",
-      //     "Ignore"
-      //   );
-      // }
+      const resResult = [];
 
-      const resResult = {
-        category: result
-          .map((item) => {
-            item.category;
-          })
-          .toString(),
-        region: result.map((item) => item.region).toString(),
-      };
+      for (let i = 0; i <= result.length - 1; i += 1) {
+        const category = result[i];
+        // const category = result
+        //   .map((item) => {
+        //     item.category.trim();
+        //   })
+        //   .toString();
+
+        // const region = result.map((item) => item.region).toString();
+
+        // const date = result.map((item) =>
+        //   item.updated.split(" ")[1].toString()
+        // );
+
+        resResult.push(result);
+      }
+
+      // const resResult = {
+      //   category: result
+      //     .map((item) => {
+      //       item.category;
+      //     })
+      //     .toString(),
+      //   region: result.map((item) => item.region).toString(),
+      // };
 
       Logger.info("[DATA_QUERY] data %o", resResult);
     } catch (error) {
