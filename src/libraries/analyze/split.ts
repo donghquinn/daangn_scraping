@@ -19,9 +19,15 @@ export class DataAnalyze {
 
   public async getAllData() {
     try {
+      console.log("hi 0");
+
       const totalCount = await this.getTotalCount();
 
+      console.log("hi 1");
+
       const result = await Mysql.query<GetCombined[]>(selectCombined);
+
+      console.log("hi 2");
 
       Logger.info("[DATA_QUERY] Found Data");
 
@@ -39,10 +45,12 @@ export class DataAnalyze {
           return {
             region: item.region,
             category: item.category,
-            date: item.updated.split(" ")[1],
+            date: item.updated.split("")[1],
           };
         }),
       };
+
+      console.log("hi 3");
 
       Logger.info("[DATE_QUERY] FOUND Combined Data");
 
