@@ -25,10 +25,6 @@ export class DataAnalyze {
 
   public async getAllData() {
     try {
-      // console.log("hi 0");
-
-      // const { count } = await this.getTotalCount();
-
       const [...result] = await Mysql.query<GetCombined[]>(selectCombined);
 
       Logger.info("[DATA_QUERY] Found Data");
@@ -49,17 +45,6 @@ export class DataAnalyze {
 
       for (let i = 0; i <= result.length - 1; i += 1) {
         const category = result[i];
-        // const category = result
-        //   .map((item) => {
-        //     item.category.trim();
-        //   })
-        //   .toString();
-
-        // const region = result.map((item) => item.region).toString();
-
-        // const date = result.map((item) =>
-        //   item.updated.split(" ")[1].toString()
-        // );
 
         resResult.push(category);
       }
@@ -74,6 +59,8 @@ export class DataAnalyze {
       // };
 
       Logger.info("[DATA_QUERY] data %o", resResult);
+
+      return resResult;
     } catch (error) {
       if (error instanceof MysqlError) {
         throw new MysqlError("[DATA_QUERY]", "MYSQL ERROR", "Query error");
@@ -95,9 +82,7 @@ export class DataAnalyze {
     try {
       const counts = await Mysql.query<TotalCounts>(selectTotalCount);
 
-      const { count } = counts;
-
-      Logger.info(`[DATA_QUERY] Total Count: ${count}`);
+      Logger.info("[DATA_QUERY] Total Count, %o", counts.count);
 
       return counts;
     } catch (error) {
