@@ -14,7 +14,7 @@ export class DataAnalyze {
     return this.instance;
   }
 
-  async getAllData() {
+  public async getAllData() {
     try {
       const totalData = await this.getTotalCount();
 
@@ -39,7 +39,7 @@ export class DataAnalyze {
     }
   }
 
-  async getTotalCount() {
+  public async getTotalCount() {
     try {
       const { count } = await Mysql.query<TotalCounts>(selectTotalCount);
 
