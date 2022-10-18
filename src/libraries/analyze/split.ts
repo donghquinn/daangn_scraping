@@ -61,7 +61,7 @@ export class DataAnalyze {
         //   item.updated.split(" ")[1].toString()
         // );
 
-        resResult.push(result);
+        resResult.push(category);
       }
 
       // const resResult = {
