@@ -34,7 +34,7 @@ export class DataAnalyze {
       }
 
       const resResult = {
-        totalCount,
+        count: totalCount.count,
         data: result.map((item) => {
           return {
             region: item.region,
