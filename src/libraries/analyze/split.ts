@@ -29,11 +29,7 @@ export class DataAnalyze {
 
       // const { count } = await this.getTotalCount();
 
-      console.log("hi 1");
-
       const result = await Mysql.query<GetCombined[]>(selectCombined);
-
-      console.log("hi 2");
 
       Logger.info("[DATA_QUERY] Found Data");
 
@@ -46,8 +42,6 @@ export class DataAnalyze {
       }
 
       // this.resultArray.push(...result);
-
-      console.log("hi 3");
 
       Logger.info("[DATE_QUERY] FOUND Combined Data");
 
@@ -64,7 +58,7 @@ export class DataAnalyze {
         }),
       };
 
-      if (!resResult || resResult === undefined) {
+      if (!resResult.data || resResult.data === undefined) {
         throw new MysqlError("[DATA_QUERY]", "NO DATA FOUND", "Mysql");
       }
 
