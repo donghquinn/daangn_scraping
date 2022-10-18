@@ -58,12 +58,13 @@ export class DataAnalyze {
       //     "Ignore"
       //   );
       // }
-
-      return Logger.info("[DATA_QUERY] data %o", {
+      const resResult = {
         data: result.find((item) => {
           item.category, item.region, item.updated.split(" ")[1];
         }),
-      });
+      };
+
+      return Logger.info("[DATA_QUERY] data %o", resResult);
     } catch (error) {
       if (error instanceof MysqlError) {
         throw new MysqlError("[DATA_QUERY]", "MYSQL ERROR", "Query error");
