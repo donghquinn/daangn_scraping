@@ -9,6 +9,12 @@ import { Logger } from "utils";
 export class DataAnalyze {
   private static instance: DataAnalyze;
 
+  private resultArray: Array<GetCombined>;
+
+  constructor() {
+    this.resultArray = [];
+  }
+
   public static getInstance() {
     if (!this.instance) {
       this.instance = new DataAnalyze();
@@ -21,11 +27,13 @@ export class DataAnalyze {
     try {
       console.log("hi 0");
 
-      const totalCount = await this.getTotalCount();
+      const { count } = await this.getTotalCount();
 
       console.log("hi 1");
 
       const result = await Mysql.query<GetCombined[]>(selectCombined);
+
+      const [{ region }] = result;
 
       console.log("hi 2");
 
@@ -39,16 +47,19 @@ export class DataAnalyze {
         );
       }
 
-      const resResult = {
-        count: totalCount.count,
-        data: result.map((item) => {
-          return {
-            region: item.region,
-            category: item.category,
-            date: item.updated.split("")[1],
-          };
-        }),
-      };
+      for (let i = 0; i <= result.length - 1; i += 1) {
+        this.resultArray.push(result[i]);
+      }
+      // const resResult = {
+      //   count: count,
+      //   data: result.map((item) => {
+      //     return {
+      //       region: item.region,
+      //       category: item.category,
+      //       date: item.updated.split("")[1],
+      //     };
+      //   }),
+      // };
 
       console.log("hi 3");
 
@@ -62,7 +73,7 @@ export class DataAnalyze {
       //   );
       // }
 
-      return resResult;
+      return this.resultArray;
     } catch (error) {
       if (error instanceof MysqlError) {
         throw new MysqlError("[DATA_QUERY]", "MYSQL ERROR", "Query error");
@@ -84,7 +95,9 @@ export class DataAnalyze {
     try {
       const counts = await Mysql.query<TotalCounts>(selectTotalCount);
 
-      Logger.info(`[DATA_QUERY] Total Count: ${counts.count}`);
+      const { count } = counts;
+
+      Logger.info(`[DATA_QUERY] Total Count: ${count}`);
 
       return counts;
     } catch (error) {
