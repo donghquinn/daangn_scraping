@@ -47,19 +47,7 @@ export class DataAnalyze {
         );
       }
 
-      for (let i = 0; i <= result.length - 1; i += 1) {
-        this.resultArray.push(result[i]);
-      }
-      // const resResult = {
-      //   count: count,
-      //   data: result.map((item) => {
-      //     return {
-      //       region: item.region,
-      //       category: item.category,
-      //       date: item.updated.split("")[1],
-      //     };
-      //   }),
-      // };
+      this.resultArray.push(...result);
 
       console.log("hi 3");
 
@@ -73,7 +61,16 @@ export class DataAnalyze {
       //   );
       // }
 
-      return this.resultArray;
+      return Logger.info("[DATA_QUERY] data %o", {
+        counts: count,
+        data: {
+          region: this.resultArray.find((item) => {
+            item.region;
+          }),
+          category: this.resultArray.find((item) => item.category),
+          updated: this.resultArray.find((item) => item.updated.split(" ")[1]),
+        },
+      });
     } catch (error) {
       if (error instanceof MysqlError) {
         throw new MysqlError("[DATA_QUERY]", "MYSQL ERROR", "Query error");
