@@ -1,5 +1,7 @@
 import { MysqlError } from "error/mysql.error";
+import { DefaultContext } from "koa";
 import { Mysql } from "libraries/database";
+import { setErrorResponse, setResponse } from "libraries/request.lib";
 import { selectCombined, selectTotalCount } from "queries/select-data";
 import { GetCombined, TotalCounts } from "types/sql.types";
 import { Logger } from "utils";
@@ -23,7 +25,7 @@ export class DataAnalyze {
     return this.instance;
   }
 
-  public async getAllData() {
+  public async getAllData(ctx: DefaultContext) {
     try {
       const [...result] = await Mysql.query<GetCombined[]>(selectCombined);
 
@@ -58,47 +60,21 @@ export class DataAnalyze {
       //   region: result.map((item) => item.region).toString(),
       // };
 
-      Logger.info("[DATA_QUERY] data %o", resResult);
-
-      return resResult;
+      setResponse(ctx, 200, resResult);
     } catch (error) {
-      if (error instanceof MysqlError) {
-        throw new MysqlError("[DATA_QUERY]", "MYSQL ERROR", "Query error");
-      }
-
-      if (error instanceof Error) {
-        throw new MysqlError("[DATA_QUERY]", "NOT MYSQL ERROR", "Query error");
-      }
-
-      throw new MysqlError(
-        "[DATA_QUERY]",
-        "NOT MYSQL Error",
-        JSON.stringify(error)
-      );
+      setErrorResponse(ctx, 500, "get All Data Error");
     }
   }
 
-  public async getTotalCount() {
+  public async getTotalCount(ctx: DefaultContext) {
     try {
       const { count } = await Mysql.query<TotalCounts>(selectTotalCount);
 
       Logger.info("[DATA_QUERY] Total Count, %o", count);
 
-      return count;
+      setResponse(ctx, 200, count);
     } catch (error) {
-      if (error instanceof MysqlError) {
-        throw new MysqlError("[DATA_QUERY]", "MYSQL ERROR", "Query error");
-      }
-
-      if (error instanceof Error) {
-        throw new MysqlError("[DATA_QUERY]", "NOT MYSQL ERROR", "Query error");
-      }
-
-      throw new MysqlError(
-        "[DATA_QUERY]",
-        "NOT MYSQL Error",
-        JSON.stringify(error)
-      );
+      setErrorResponse(ctx, 500, "[Get Total Count Error]");
     }
   }
 

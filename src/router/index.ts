@@ -1,8 +1,9 @@
+import { DefaultContext } from "koa";
 import Router from "koa-router";
 import { GetCombined } from "types/sql.types";
 import { dataRouter } from "./data.router";
 
-const routerV1 = new Router<Record<string, Array<GetCombined[]>>>({
+const routerV1 = new Router<Record<string, DefaultContext>>({
   prefix: "/api",
 });
 
