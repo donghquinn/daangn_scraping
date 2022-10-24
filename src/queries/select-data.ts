@@ -23,7 +23,7 @@ FROM
 
 export const selectRegion: Sql = `
 SELECT
-  region, updated
+  region
 FROM
   ${process.env.TABLE}
 `;
