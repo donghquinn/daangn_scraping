@@ -1,5 +1,5 @@
 import { MysqlError } from "error/mysql.error";
-import { DefaultContext } from "koa";
+import { Context } from "koa";
 import { Mysql } from "libraries/database";
 import { setErrorResponse, setResponse } from "libraries/request.lib";
 import { selectCombined, selectTotalCount } from "queries/select-data";
@@ -25,7 +25,7 @@ export class DataAnalyze {
     return this.instance;
   }
 
-  public async getAllData(ctx: DefaultContext) {
+  public async getAllData(ctx: Context) {
     try {
       const [...result] = await Mysql.query<GetCombined[]>(selectCombined);
 
@@ -66,7 +66,7 @@ export class DataAnalyze {
     }
   }
 
-  public async getTotalCount(ctx: DefaultContext) {
+  public async getTotalCount(ctx: Context) {
     try {
       const { count } = await Mysql.query<TotalCounts>(selectTotalCount);
 

@@ -1,11 +1,10 @@
-import { DefaultContext, Next } from "koa";
+import { Context } from "koa";
 import Router from "koa-router";
 import { DataAnalyze } from "libraries/analyze/split";
-import { GetCombined } from "types/sql.types";
 
 const { getAllData, getTotalCount } = DataAnalyze.getInstance();
 
-const dataRouter = new Router<Record<string, DefaultContext>>();
+const dataRouter = new Router<Record<string, Context>>();
 
 dataRouter.get("/data", (ctx) => getAllData(ctx));
 

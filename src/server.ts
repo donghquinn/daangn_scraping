@@ -5,6 +5,7 @@ import cors from "koa-cors";
 import { Server } from "http";
 import { Logger } from "utils";
 import { routerV1 } from "router";
+import { authHeader } from "middlewares/auth.middleware";
 
 export class KoaRouter {
   private port: number;
@@ -25,6 +26,7 @@ export class KoaRouter {
     this.koa.use(json());
     this.koa.use(helmet());
     this.koa.use(cors());
+    this.koa.use(authHeader);
     this.koa.use(routerV1.routes());
     this.koa.use(routerV1.allowedMethods());
   }
