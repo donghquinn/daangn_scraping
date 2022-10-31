@@ -4,8 +4,9 @@ import helmet from "koa-helmet";
 import cors from "koa-cors";
 import { Server } from "http";
 import { Logger } from "utils";
-import { routerV1 } from "router";
+import { routerV1 } from "router/v1";
 import { authHeader } from "middlewares/auth.middleware";
+import { routerV2 } from "router/v2";
 
 export class KoaRouter {
   private port: number;
@@ -29,6 +30,8 @@ export class KoaRouter {
     this.koa.use(authHeader);
     this.koa.use(routerV1.routes());
     this.koa.use(routerV1.allowedMethods());
+    this.koa.use(routerV2.routes());
+    this.koa.use(routerV2.allowedMethods());
   }
 
   start() {

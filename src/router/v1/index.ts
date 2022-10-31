@@ -3,7 +3,7 @@ import Router from "koa-router";
 import { dataRouter } from "./data.router";
 
 const routerV1 = new Router<Record<string, Context>>({
-  prefix: "/api",
+  prefix: "/v1",
 });
 
 routerV1.use(dataRouter.routes());

@@ -1,6 +1,6 @@
 import { Context } from "koa";
 import { Mysql } from "libraries/database";
-import { setErrorResponse } from "libraries/request.lib";
+import { setErrorResponse, setResponse } from "libraries/request.lib";
 import { selectRegion } from "queries/select-data";
 import { RegionScoreObject } from "types/bestRegion.types";
 import { GetRegion } from "types/sql.types";
@@ -39,6 +39,8 @@ export async function getAllRegionList(ctx: Context) {
     }
 
     // TODO 위에서 동적으로 생성한 객체의 value값을 기준으로 내림차순...
+
+    return setResponse(ctx, 200, { returnData });
   } catch (error) {
     setErrorResponse(ctx, 500, "[Get Best Region Error Found]");
   }
