@@ -15,17 +15,17 @@ export async function getRegionScore(ctx: Context) {
   const returnData: RegionScoreObject = {};
 
   try {
-    const [region] = await Mysql.query<GetRegion[]>(selectRegion);
+    const region = await Mysql.query<GetRegion>(selectRegion);
 
     for (let regions in region) {
       const splittedRegion = regions.split(" ")[1];
 
       totalArray.push(splittedRegion);
 
-      // 배열 내부에 파싱 된 지역이 있다면 얼리 리턴 - 지역 리스트만 뽑으려고 함
-      if (regionArray.includes(splittedRegion)) {
-        return;
-      }
+      // // 배열 내부에 파싱 된 지역이 있다면 얼리 리턴 - 지역 리스트만 뽑으려고 함
+      // if (regionArray.includes(splittedRegion)) {
+      //   return;
+      // }
 
       // 만약 해당 지역이 이미 객체에 등록되어 있을 경우 점수 1 추가
       if (returnData[regions]) {
