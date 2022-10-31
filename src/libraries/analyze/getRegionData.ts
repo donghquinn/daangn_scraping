@@ -20,40 +20,42 @@ export async function getRegionScore(ctx: Context) {
 
     const [region] = await Mysql.query<GetRegion[]>(selectRegion);
 
-    for (let regions in region) {
-      Logger.info("[Region_Score] Parsing Start");
+    Logger.info("[Region_Score] Queried Data : %o", region);
 
-      // const splittedRegion = regions.split(" ")[1];
-      const splittedRegion = regions[1];
-      Logger.info("[Region_scrape] Region Data %o", splittedRegion);
+    // for (let i = 0; i < region; i += 1) {
+    //   Logger.info("[Region_Score] Parsing Start");
 
-      totalArray.push(splittedRegion);
+    //   // const splittedRegion = regions.split(" ")[1];
+    //   const splittedRegion = region[i];
+    //   Logger.info("[Region_scrape] Region Data %o", splittedRegion);
 
-      // // 배열 내부에 파싱 된 지역이 있다면 얼리 리턴 - 지역 리스트만 뽑으려고 함
-      // if (regionArray.includes(splittedRegion)) {
-      //   return;
-      // }
+    //   totalArray.push(splittedRegion);
 
-      // 만약 해당 지역이 이미 객체에 등록되어 있을 경우 점수 1 추가
-      if (returnData[regions]) {
-        Logger.info(
-          "[Region_Score] Found Region from Object. Score Add: %o",
-          regions
-        );
+    //   // // 배열 내부에 파싱 된 지역이 있다면 얼리 리턴 - 지역 리스트만 뽑으려고 함
+    //   // if (regionArray.includes(splittedRegion)) {
+    //   //   return;
+    //   // }
 
-        returnData[regions] + 1;
-      }
+    //   // 만약 해당 지역이 이미 객체에 등록되어 있을 경우 점수 1 추가
+    //   if (returnData[regions]) {
+    //     Logger.info(
+    //       "[Region_Score] Found Region from Object. Score Add: %o",
+    //       regions
+    //     );
 
-      // 없을 경우 새롭게 등록
-      Logger.info(
-        "[Region_Score] Not Found Region Data. Register New region %o",
-        regions
-      );
+    //     returnData[regions] + 1;
+    //   }
 
-      returnData[regions] = 0;
+    //   // 없을 경우 새롭게 등록
+    //   Logger.info(
+    //     "[Region_Score] Not Found Region Data. Register New region %o",
+    //     regions
+    //   );
 
-      regionArray.push(splittedRegion);
-    }
+    //   returnData[regions] = 0;
+
+    //   regionArray.push(splittedRegion);
+    // }
 
     // TODO 위에서 동적으로 생성한 객체의 value값을 기준으로 내림차순...
 
