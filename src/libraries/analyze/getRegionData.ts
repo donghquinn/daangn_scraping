@@ -15,7 +15,7 @@ export async function getRegionScore(ctx: Context) {
   const returnData: RegionScoreObject = {};
 
   try {
-    const region = await Mysql.query<GetRegion[]>(selectRegion);
+    const [region] = await Mysql.query<GetRegion[]>(selectRegion);
 
     for (let regions in region) {
       const splittedRegion = regions.split(" ")[1];
