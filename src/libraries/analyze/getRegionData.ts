@@ -22,7 +22,7 @@ export async function getRegionScore(ctx: Context) {
 
     Logger.info("[Region_Score] Queried Data : %o", region);
 
-    for (let regions in region) {
+    for (let regions in region.values) {
       Logger.info("[Region_Score] Parsing Start");
 
       // const splittedRegion = regions.split(" ")[1];
