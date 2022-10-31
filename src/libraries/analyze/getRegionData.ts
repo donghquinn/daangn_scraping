@@ -29,7 +29,9 @@ export async function getRegionScore(ctx: Context) {
         returnData[splittedRegion] += 1;
       }
 
-      returnData[splittedRegion] = 0;
+      if (!returnData[splittedRegion]) {
+        returnData[splittedRegion] = 0;
+      }
     });
 
     // for (let values in region) {
