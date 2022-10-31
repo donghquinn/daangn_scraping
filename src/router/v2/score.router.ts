@@ -6,6 +6,6 @@ const regionScoreRouter = new Router<Record<string, Context>>({
   prefix: "/score",
 });
 
-regionScoreRouter.get("/region", async (ctx) => getRegionScore(ctx));
+regionScoreRouter.get("/region", (ctx) => getRegionScore(ctx));
 
 export { regionScoreRouter };
