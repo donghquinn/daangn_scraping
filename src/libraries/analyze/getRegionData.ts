@@ -22,39 +22,40 @@ export async function getRegionScore(ctx: Context) {
 
     Logger.info("[Region_Score] Queried Data : %o", region);
 
-    for (let regions in region.values) {
-      Logger.info("[Region_Score] Parsing Start");
+    for (let values in region) {
+      for (let regions in values.valueOf) {
+        Logger.info("[Region_Score] Parsing Start");
+        // const splittedRegion = regions.split(" ")[1];
+        const splittedRegion = regions.split(" ")[1];
+        Logger.info("[Region_scrape] Region Data %o", splittedRegion);
 
-      // const splittedRegion = regions.split(" ")[1];
-      const splittedRegion = regions.split(" ")[1];
-      Logger.info("[Region_scrape] Region Data %o", splittedRegion);
+        totalArray.push(splittedRegion);
 
-      totalArray.push(splittedRegion);
+        // // 배열 내부에 파싱 된 지역이 있다면 얼리 리턴 - 지역 리스트만 뽑으려고 함
+        // if (regionArray.includes(splittedRegion)) {
+        //   return;
+        // }
 
-      // // 배열 내부에 파싱 된 지역이 있다면 얼리 리턴 - 지역 리스트만 뽑으려고 함
-      // if (regionArray.includes(splittedRegion)) {
-      //   return;
-      // }
+        // 만약 해당 지역이 이미 객체에 등록되어 있을 경우 점수 1 추가
+        if (returnData[regions]) {
+          Logger.info(
+            "[Region_Score] Found Region from Object. Score Add: %o",
+            regions
+          );
 
-      // 만약 해당 지역이 이미 객체에 등록되어 있을 경우 점수 1 추가
-      if (returnData[regions]) {
+          returnData[regions] + 1;
+        }
+
+        // 없을 경우 새롭게 등록
         Logger.info(
-          "[Region_Score] Found Region from Object. Score Add: %o",
+          "[Region_Score] Not Found Region Data. Register New region %o",
           regions
         );
 
-        returnData[regions] + 1;
+        returnData[regions] = 0;
+
+        regionArray.push(splittedRegion);
       }
-
-      // 없을 경우 새롭게 등록
-      Logger.info(
-        "[Region_Score] Not Found Region Data. Register New region %o",
-        regions
-      );
-
-      returnData[regions] = 0;
-
-      regionArray.push(splittedRegion);
     }
 
     // TODO 위에서 동적으로 생성한 객체의 value값을 기준으로 내림차순...
