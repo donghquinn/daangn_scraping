@@ -18,12 +18,13 @@ export async function getRegionScore(ctx: Context) {
   try {
     Logger.info("[Region_Score] Region Query");
 
-    const region = await Mysql.query<GetRegion[]>(selectRegion);
+    const [region] = await Mysql.query<GetRegion[]>(selectRegion);
 
-    for (let regions in [...region]) {
+    for (let regions in region) {
       Logger.info("[Region_Score] Parsing Start");
 
       const splittedRegion = regions.split(" ")[1];
+      // const splittedRegion = regions[1];
       Logger.info("[Region_scrape] Region Data %o", splittedRegion);
 
       totalArray.push(splittedRegion);
