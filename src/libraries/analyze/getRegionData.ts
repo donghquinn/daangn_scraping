@@ -18,7 +18,7 @@ export async function getRegionScore(ctx: Context) {
   try {
     Logger.info("[Region_Score] Region Query");
 
-    const [region] = await Mysql.query<GetRegion[]>(selectRegion);
+    const [...region] = await Mysql.query<GetRegion[]>(selectRegion);
 
     Logger.info("[Region_Score] Queried Data : %o", region);
 
