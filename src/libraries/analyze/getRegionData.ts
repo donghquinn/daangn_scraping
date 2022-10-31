@@ -26,7 +26,7 @@ export async function getRegionScore(ctx: Context) {
       Logger.info("[Region_Score] Parsing Start");
 
       // const splittedRegion = regions.split(" ")[1];
-      const splittedRegion = regions[regions][1];
+      const splittedRegion = regions[regions].split(" ")[1];
       Logger.info("[Region_scrape] Region Data %o", splittedRegion);
 
       totalArray.push(splittedRegion);
