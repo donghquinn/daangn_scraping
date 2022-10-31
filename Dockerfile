@@ -11,6 +11,6 @@ RUN apk --no-cache add tzdata && \
   cp /usr/share/zoneinfo/Asia/Seoul /etc/localtime && \
   echo "Asia/Seoul" > /etc/timezone
 
-RUN mkdir -p /app/logs
+RUN npm run build
 
 CMD ["npm","run","dev"]
