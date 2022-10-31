@@ -5,7 +5,7 @@ import { selectRegion } from "queries/select-data";
 import { RegionScoreObject } from "types/bestRegion.types";
 import { GetRegion } from "types/sql.types";
 
-export async function getAllRegionList(ctx: Context) {
+export async function getRegionScore(ctx: Context) {
   // 전체 데이터 지역 정리 - 쿼리 결과에서 두번째 지역 정보만 넣은 그대로
   const totalArray: string[] = [];
 
