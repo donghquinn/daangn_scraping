@@ -26,11 +26,11 @@ export async function getRegionScore(ctx: Context) {
       const splittedRegion = item.region.split(" ")[1];
 
       if (returnData[splittedRegion]) {
-        returnData[splittedRegion] += 1;
+        returnData[splittedRegion] = returnData[splittedRegion] + 1;
       }
 
       if (!returnData[splittedRegion]) {
-        returnData[splittedRegion] = 0;
+        returnData[splittedRegion] = 1;
       }
     });
 
