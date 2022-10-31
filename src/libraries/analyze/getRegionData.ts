@@ -4,15 +4,15 @@ import { setErrorResponse } from "libraries/request.lib";
 import { selectRegion } from "queries/select-data";
 import { GetRegion } from "types/sql.types";
 
-async function getBestRegion(ctx: Context) {
+export async function getAllRegionList(ctx: Context) {
+  // 전체 데이터 지역 정리 - 쿼리 결과 그대로
+  const totalArray: string[] = [];
+
+  // 지역 리스트
+  const regionArray: string[] = [];
+
   try {
-    const [...region] = await Mysql.query<GetRegion[]>(selectRegion);
-
-    // 전체 데이터 지역 정리
-    const totalArray: string[] = [];
-
-    // 지역 리스트
-    const regionArray: string[] = [];
+    const [region] = await Mysql.query<GetRegion[]>(selectRegion);
 
     for (let regions in region) {
       const splittedRegion = regions.split(" ")[1];
