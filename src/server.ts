@@ -27,7 +27,7 @@ export class KoaRouter {
     this.koa.use(json());
     this.koa.use(helmet());
     this.koa.use(cors());
-    this.koa.use(authHeader);
+    // this.koa.use(authHeader);
     this.koa.use(routerV1.routes());
     this.koa.use(routerV1.allowedMethods());
     this.koa.use(routerV2.routes());
