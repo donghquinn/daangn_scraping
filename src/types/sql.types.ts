@@ -11,6 +11,10 @@ export interface GetRegion {
   region: string;
 }
 
+export interface GetCategory {
+  category: string;
+}
+
 export interface GetCategory extends DefaultQuery {
   category: string;
 }

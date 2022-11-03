@@ -16,7 +16,7 @@ FROM
 
 export const selectCategories: Sql = `
 SELECT
-  category, updated
+  category
 FROM
   ${process.env.TABLE}
 `;
