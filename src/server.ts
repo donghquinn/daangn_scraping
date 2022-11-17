@@ -1,12 +1,11 @@
-import Koa from "koa";
-import json from "koa-json";
-import helmet from "koa-helmet";
-import cors from "koa-cors";
 import { Server } from "http";
-import { Logger } from "utils";
+import Koa from "koa";
+import cors from "koa-cors";
+import helmet from "koa-helmet";
+import json from "koa-json";
 import { routerV1 } from "router/v1";
-import { authHeader } from "middlewares/auth.middleware";
 import { routerV2 } from "router/v2";
+import { Logger } from "utils";
 
 export class KoaRouter {
   private port: number;
