@@ -27,3 +27,10 @@ SELECT
 FROM
   ${process.env.TABLE}
 `;
+
+export const selectCategoryAndRegion: Sql = `
+  SELECT
+    category
+  FROM
+    ${process.env.TABLE}    
+`;

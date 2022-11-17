@@ -1,12 +1,8 @@
 import { Context } from "koa";
 import { Mysql } from "libraries/database";
 import { setErrorResponse, setResponse } from "libraries/request.lib";
-import {
-  selectCombined,
-  selectRegion,
-  selectTotalCount,
-} from "queries/select-data";
-import { GetCombined, GetRegion, TotalCounts } from "types/sql.types";
+import { selectCombined, selectTotalCount } from "queries/select-data";
+import { GetCombined, TotalCounts } from "types/sql.types";
 import { Logger } from "utils";
 
 // TODO 카테고리, 지역 이름 데이터 뽑아와서 해당 타입 가드하고
