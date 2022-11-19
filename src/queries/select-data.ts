@@ -59,5 +59,5 @@ export const queryCategoriesPerRegion: Sql = `
   GROUP BY
     T.region
   ORDER BY
-    T.categorycount DESC
+    categorycount DESC
 `;
