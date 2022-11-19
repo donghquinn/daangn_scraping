@@ -53,7 +53,7 @@ export const selectCategoryAndRegion: Sql = `
 
 export const queryCategoriesPerRegion: Sql = `
   SELECT
-    T.category, T.region, COUNT(T.category) as categorycount
+   T.region, T.category, COUNT(T.category) as categorycount
   FROM
     ${process.env.TABLE} as T
   GROUP BY
