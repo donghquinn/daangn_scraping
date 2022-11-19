@@ -53,7 +53,7 @@ export const selectCategoryAndRegion: Sql = `
 
 export const queryCategoriesPerRegion: Sql = `
   SELECT
-   SUBSTRING_INDEX(SUBSTRING_INDEX(T.region, ' ', 2), ' ', 2) as regions, T.category, COUNT(T.category) as categorycount
+   SUBSTRING_INDEX(SUBSTRING_INDEX(T.region, ' ', 2), ' ', -1) as regions, T.category, COUNT(T.category) as categorycount
   FROM
     ${process.env.TABLE} as T
   GROUP BY
