@@ -1,6 +1,7 @@
 import { MysqlError } from "error/mysql.error";
 import { Context } from "koa";
 import { Mysql } from "libraries/database";
+import { setErrorResponse, setResponse } from "libraries/request.lib";
 import { queryCategoriesPerRegion } from "queries/select-data";
 import { CategoryPerRegion } from "types/bestRegion.types";
 
@@ -25,16 +26,8 @@ export async function getRecommendation(ctx: Context) {
       queryCategoriesPerRegion
     );
 
-    return categoryPerRegion;
+    setResponse(ctx, 200, categoryPerRegion);
   } catch (error) {
-    if (error instanceof MysqlError) {
-      throw new MysqlError("[SELECT]", "MYSQL ERROR", error.message);
-    }
-
-    if (error instanceof Error) {
-      throw new MysqlError("[SELECT]", "NOT MYSQL ERROR", error.message);
-    }
-
-    throw new MysqlError("[SELECt]", "UNHANDABLE ERROR", JSON.stringify(error));
+    setErrorResponse(ctx, 500, JSON.stringify(error));
   }
 }
