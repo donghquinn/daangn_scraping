@@ -24,3 +24,8 @@ export interface GetCombined {
   category: string;
   updated: string;
 }
+
+export interface GetRecommendData {
+  region: string;
+  category: string;
+}

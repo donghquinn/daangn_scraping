@@ -28,9 +28,36 @@ FROM
   ${process.env.TABLE}
 `;
 
+export const selectRegionLists: Sql = `
+  SELECT
+  DISTINCT
+    region
+  FROM
+    ${process.env.TABLE}
+`;
+
+export const selectCategoryList: Sql = `
+  SELECT
+  DISTINCT
+    category
+  FROM 
+    ${process.env.TABLE}
+`;
+
 export const selectCategoryAndRegion: Sql = `
   SELECT
     category
   FROM
     ${process.env.TABLE}    
+`;
+
+export const queryCategoriesPerRegion: Sql = `
+  SELECT
+    T.category, T.region, COUNT(T.category) as categorycount
+  FROM
+    ${process.env.TABLE} as T
+  GROUP BY
+    T.region
+  ORDER BY
+    T.categorycount DESC
 `;
