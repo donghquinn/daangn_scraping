@@ -56,10 +56,6 @@ export const queryCategoriesPerRegion: Sql = `
    SUBSTRING_INDEX(SUBSTRING_INDEX(T.region, ' ', 2), ' ', 2) as regions, T.category, COUNT(T.category) as categorycount
   FROM
     ${process.env.TABLE} as T
-  WHERE
-    T.region
-  LIKE
-    ?
   GROUP BY
     regions
   ORDER BY
