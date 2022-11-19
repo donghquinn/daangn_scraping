@@ -2,3 +2,9 @@
 export interface RegionScoreObject {
   [key: string]: number;
 }
+
+export interface CategoryPerRegion {
+  region: string;
+  category: string;
+  categorycount: string;
+}

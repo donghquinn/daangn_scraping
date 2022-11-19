@@ -1,8 +1,8 @@
-import { Context } from "koa";
+import { Context, DefaultState } from "koa";
 import Router from "koa-router";
 import { dataRouter } from "./data.router";
 
-const routerV1 = new Router<Record<string, Context>>({
+const routerV1 = new Router<DefaultState, Context>({
   prefix: "/v1",
 });
 

@@ -1,11 +1,15 @@
-import { Context } from "koa";
+import { Context, DefaultState } from "koa";
 import Router from "koa-router";
+import { getCategoryScore } from "libraries/analyze/getCategoryData";
 import { getRegionScore } from "libraries/analyze/getRegionData";
+import { getRecommendation } from "libraries/analyze/getRecommendation";
 
-const regionScoreRouter = new Router<Record<string, Context>>({
+const scoreRouter = new Router<DefaultState, Context>({
   prefix: "/score",
 });
 
-regionScoreRouter.get("/region", (ctx) => getRegionScore(ctx));
+scoreRouter.get("/region", (ctx) => getRegionScore(ctx));
+scoreRouter.get("/category", (ctx) => getCategoryScore(ctx));
+scoreRouter.get("/select", (ctx) => getRecommendation(ctx));
 
-export { regionScoreRouter };
+export { scoreRouter };
