@@ -61,3 +61,39 @@ export const queryCategoriesPerRegion: Sql = `
   ORDER BY
     regions
 `;
+
+export const selectTotalCountSurvey: Sql = `
+  SELECT
+    COUNT(*) as surveytotal
+  FROM
+    ${process.env.SURVEY}
+`;
+
+export const selectTotalAgeCount: Sql = `
+  SELECT
+    COUNT(*) as count
+  FROM
+    ${process.env.SURVEY}
+  WHERE
+    age = ?
+`;
+
+export const selectTotalPlatformCount: Sql = `
+  SELECT
+    platforms, COUNT(*) as count
+  FROM
+    ${process.env.SURVEY}
+  GROUP BY
+    platforms
+  ORDER BY
+    count DESC
+`;
+
+export const selectTotalReasons: Sql = `
+  SELECT 
+    *
+  FROM
+    ${process.env.SURVEY}
+  GROUP BY
+    reasons
+`;
