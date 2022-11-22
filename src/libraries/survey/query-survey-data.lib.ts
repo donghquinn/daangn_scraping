@@ -99,6 +99,7 @@ export async function getSurveyData(
   reasons: string
 ) {
   try {
+    // 데이터 DB에 저장
     await surveyDataInput(age, platforms, reasons);
   } catch (error) {
     if (error instanceof MysqlError) {
