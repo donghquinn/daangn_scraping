@@ -4,8 +4,10 @@ import {
   selectTotalAgeCount,
   selectTotalCountSurvey,
   selectTotalPlatformCount,
+  selectTotalReasons,
 } from "queries/select-data";
 import {
+  ReasonsWithPlatformResult,
   SurveyPlatformsQuery,
   SurveyQueryCount,
   SurveyTotalCount,
@@ -29,6 +31,8 @@ export async function selectSurveyData() {
 
   // 플랫폼 별 카운트 개수
   const platformReturnData: Array<SurveyPlatformsQuery> = [];
+  const reasonsWithPlatforms: Array<ReasonsWithPlatformResult> = [];
+
   try {
     // 전체 설문조사 응답 수
     const { surveytotal } = await Mysql.query<SurveyTotalCount>(
@@ -54,7 +58,28 @@ export async function selectSurveyData() {
       platformReturnData.push({ platforms: item.platforms, count: item.count });
     });
 
-    return { surveytotal, returnObject, platformReturnData };
+    // 플랫폼 별 사용하지 않는 이유
+    platformReturnData.filter(async (item) => {
+      const [...totalReasons] = await Mysql.query<ReasonsWithPlatformResult[]>(
+        selectTotalReasons,
+        [item.platforms]
+      );
+
+      totalReasons.filter((result) => {
+        reasonsWithPlatforms.push({
+          platforms: result.platforms,
+          reasons: result.reasons,
+          count: result.count,
+        });
+      });
+    });
+
+    return {
+      surveytotal,
+      returnObject,
+      platformReturnData,
+      reasonsWithPlatforms,
+    };
   } catch (error) {
     if (error instanceof MysqlError) {
       throw new MysqlError("[SURVEY]", "MYSQL ERROR", error.message);

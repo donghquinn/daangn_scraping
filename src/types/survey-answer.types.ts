@@ -20,3 +20,9 @@ export interface SurveyPlatformsQuery {
 export interface totalAgeReturnData {
   [key: string]: string;
 }
+
+export interface ReasonsWithPlatformResult {
+  platforms: string;
+  reasons: string;
+  count: string;
+}

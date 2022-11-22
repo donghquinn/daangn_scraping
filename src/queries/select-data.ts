@@ -91,9 +91,13 @@ export const selectTotalPlatformCount: Sql = `
 
 export const selectTotalReasons: Sql = `
   SELECT 
-    *
+   platforms, reasons, COUNT(*) as count
   FROM
     ${process.env.SURVEY}
+  WHERE
+    platforms = ?
   GROUP BY
     reasons
+  ORDER BY
+    count DESC
 `;
