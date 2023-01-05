@@ -53,11 +53,51 @@ export const selectCategoryAndRegion: Sql = `
 
 export const queryCategoriesPerRegion: Sql = `
   SELECT
-   SUBSTRING_INDEX(SUBSTRING_INDEX(T.region, ' ', 2), ' ', 2) as regions, T.category, COUNT(T.category) as categorycount
+   SUBSTRING_INDEX(SUBSTRING_INDEX(T.region, ' ', 2), ' ', -1) as regions, T.category, COUNT(T.category) as categorycount
   FROM
     ${process.env.TABLE} as T
   GROUP BY
     regions
   ORDER BY
     regions
+`;
+
+export const selectTotalCountSurvey: Sql = `
+  SELECT
+    COUNT(*) as surveytotal
+  FROM
+    ${process.env.SURVEY}
+`;
+
+export const selectTotalAgeCount: Sql = `
+  SELECT
+    COUNT(*) as count
+  FROM
+    ${process.env.SURVEY}
+  WHERE
+    age = ?
+`;
+
+export const selectTotalPlatformCount: Sql = `
+  SELECT
+    platforms, COUNT(*) as count
+  FROM
+    ${process.env.SURVEY}
+  GROUP BY
+    platforms
+  ORDER BY
+    count DESC
+`;
+
+export const selectTotalReasons: Sql = `
+  SELECT 
+   platforms, reasons, COUNT(*) as count
+  FROM
+    ${process.env.SURVEY}
+  WHERE
+    platforms = ?
+  GROUP BY
+    reasons
+  ORDER BY
+    count DESC
 `;
