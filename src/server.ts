@@ -3,8 +3,10 @@ import Koa from "koa";
 import cors from "koa-cors";
 import helmet from "koa-helmet";
 import json from "koa-json";
+import bodyparser from "koa-bodyparser";
 import { routerV1 } from "router/v1";
 import { routerV2 } from "router/v2";
+import { routerV3 } from "router/v3";
 import { Logger } from "utils";
 
 export class KoaRouter {
@@ -26,11 +28,14 @@ export class KoaRouter {
     this.koa.use(json());
     this.koa.use(helmet());
     this.koa.use(cors());
+    this.koa.use(bodyparser());
     // this.koa.use(authHeader);
     this.koa.use(routerV1.routes());
     this.koa.use(routerV1.allowedMethods());
     this.koa.use(routerV2.routes());
     this.koa.use(routerV2.allowedMethods());
+    this.koa.use(routerV3.routes());
+    this.koa.use(routerV3.allowedMethods());
   }
 
   start() {

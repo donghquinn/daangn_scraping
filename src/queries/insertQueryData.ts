@@ -6,3 +6,10 @@ export const insertUrlAndRegion: Sql = `
   VALUES
     (?, ?, ?)
 `;
+
+export const insertSurveyAnswer: Sql = `
+  INSERT INTO ${process.env.SURVEY}
+    (age, platforms, reasons)
+  VALUES
+    (?, ?, ?)
+`;
