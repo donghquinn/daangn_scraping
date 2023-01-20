@@ -1,5 +1,5 @@
 import { DefaultContext } from "koa";
-import { Logger } from "utils";
+import { Logger } from "./logger.utils";
 
 export function setResponse(
   ctx: DefaultContext,

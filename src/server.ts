@@ -7,7 +7,7 @@ import bodyparser from "koa-bodyparser";
 import { routerV1 } from "router/v1";
 import { routerV2 } from "router/v2";
 import { routerV3 } from "router/v3";
-import { Logger } from "utils";
+import { Logger } from "utils/logger.utils";
 
 export class KoaRouter {
   private port: number;

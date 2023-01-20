@@ -2,7 +2,7 @@ import { MysqlError } from "error/mysql.error";
 import { createPool, Pool } from "mysql2/promise";
 import { DbQueryResult } from "types/query.types";
 import { Sql } from "types/sql.types";
-import { Logger } from "utils";
+import { Logger } from "utils/logger.utils";
 
 /**
  * 데이터베이스 관련 조작 클래스
