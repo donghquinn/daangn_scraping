@@ -4,7 +4,7 @@ import { setErrorResponse, setResponse } from "utils/request.lib";
 import { selectCategories } from "queries/select-data";
 import { RegionScoreObject } from "types/bestRegion.types";
 import { GetCategory } from "types/sql.types";
-import { Logger } from "utils";
+import { Logger } from "utils/logger.utils";
 
 export async function getCategoryScore(ctx: Context) {
   // 전체 데이터 지역 정리 - 쿼리 결과에서 두번째 지역 정보만 넣은 그대로

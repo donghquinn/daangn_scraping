@@ -2,7 +2,7 @@ import { Context } from "koa";
 import { Mysql } from "libraries/database/Mysql.lib";
 import { selectTotalCount } from "queries/select-data";
 import { TotalCounts } from "types/sql.types";
-import { Logger } from "utils";
+import { Logger } from "utils/logger.utils";
 import { setErrorResponse, setResponse } from "utils/request.lib";
 
 export async function getTotalCountController(ctx: Context) {
