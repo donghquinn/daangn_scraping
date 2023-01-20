@@ -36,7 +36,7 @@ export async function getCategoryScore(ctx: Context) {
 
     // TODO 위에서 동적으로 생성한 객체의 value값을 기준으로 내림차순...
 
-    return setResponse(ctx, 200, { returnData });
+    setResponse(ctx, 200, { returnData });
   } catch (error) {
     setErrorResponse(ctx, 500, "[Get Best Category Error Found]");
   }
