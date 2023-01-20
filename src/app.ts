@@ -1,6 +1,6 @@
 import "./env";
 
-import { Scraping } from "libraries";
+import { Scraping } from "libraries/manager";
 import { KoaRouter } from "server";
 
 // await parseRegion();
