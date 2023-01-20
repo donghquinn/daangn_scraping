@@ -7,9 +7,9 @@ services:
       dockerfile: ./Dockerfile
     container_name: scrape
     ports:
-      - 7000:7000
+      - 6079:6079
     env_file:
-      - ./.scrape.env
+      - ./.env
     volumes:
       - ./scrape-logs:/app/src/logs
     networks:
