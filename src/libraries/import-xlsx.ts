@@ -1,8 +1,7 @@
-import xlsx from "xlsx";
-import fs from "fs";
 import path from "path";
+import xlsx from "xlsx";
 
 const fileName = "LOCAL_PEOPLE_GU_2021.csv";
 
-const excelFile = xlsx.readFile("../files/region-code.xlsx");
-const csv = path.join(__dirname, "../files", "files", fileName);
+export const excelFile = xlsx.readFile("../files/region-code.xlsx");
+export const csv = path.join(__dirname, "../files", "files", fileName);

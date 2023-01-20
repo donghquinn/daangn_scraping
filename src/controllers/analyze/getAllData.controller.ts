@@ -1,3 +1,4 @@
+import { AnalyzeError } from "error/analyze.error";
 import { Context } from "koa";
 import { Mysql } from "libraries/database";
 import { selectCombined } from "queries/select-data";
@@ -12,7 +13,7 @@ export async function getAllDataController(ctx: Context) {
     Logger.info("[DATA_QUERY] Found Data");
 
     if (!result) {
-      throw new Error("[GET_ALL_DATA]");
+      setErrorResponse(ctx, 500, "No Result Found");
     }
 
     // this.resultArray.push(...result);
