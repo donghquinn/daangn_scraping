@@ -113,11 +113,11 @@ export async function parseCategory() {
 
     return categoryArray;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(
-        `[CATEGORY_SCRAPER] Category Scraping Error: ${error.message}`
-      );
-    }
+    throw new ParseError(
+      `[CATEGORY_SCRAPER] `,
+      `Category Scraping Error`,
+      error instanceof Error ? error : new Error(JSON.stringify(error))
+    );
   }
 }
 
