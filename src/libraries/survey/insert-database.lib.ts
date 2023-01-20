@@ -1,4 +1,4 @@
-import { MysqlError } from "error/mysql.error";
+import { SurveyError } from "error/servey.error";
 import { Mysql } from "libraries/database";
 import { insertSurveyAnswer } from "queries/insertQueryData";
 import { Logger } from "utils/logger.utils";
@@ -13,14 +13,10 @@ export async function surveyDataInput(
 
     Logger.info("[SURVEY] Answer Update Completed");
   } catch (error) {
-    if (error instanceof MysqlError) {
-      throw new MysqlError("[SURVEY]", "MYSQL ERROR", error.message);
-    }
-
-    if (error instanceof Error) {
-      throw new MysqlError("[SURVEY]", "NOT MYSQL ERROR", error.message);
-    }
-
-    throw new MysqlError("[SURVEY]", "UNHANDABLE ERROR", JSON.stringify(error));
+    throw new SurveyError(
+      "[SURVEY]",
+      "UNHANDABLE ERROR",
+      error instanceof Error ? error : new Error(JSON.stringify(error))
+    );
   }
 }

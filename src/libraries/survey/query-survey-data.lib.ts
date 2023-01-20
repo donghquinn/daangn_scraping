@@ -1,4 +1,4 @@
-import { MysqlError } from "error/mysql.error";
+import { SurveyError } from "error/servey.error";
 import { Mysql } from "libraries/database";
 import {
   selectTotalAgeCount,
@@ -54,25 +54,28 @@ export async function selectSurveyData() {
       selectTotalPlatformCount
     );
 
-    totalPlatform.filter((item) => {
-      platformReturnData.push({ platforms: item.platforms, count: item.count });
-    });
+    for (let i = 0; i < totalPlatform.length; i = +1) {
+      platformReturnData.push({
+        platforms: totalPlatform[i].platforms,
+        count: totalPlatform[i].count,
+      });
+    }
 
     // 플랫폼 별 사용하지 않는 이유
-    platformReturnData.filter(async (item) => {
+    for (let i = 0; i < platformReturnData.length; i += 1) {
       const [...totalReasons] = await Mysql.query<ReasonsWithPlatformResult[]>(
         selectTotalReasons,
-        [item.platforms]
+        [platformReturnData[i].platforms]
       );
 
-      totalReasons.filter((result) => {
+      for (let j = 0; j < totalReasons.length; j += 1) {
         reasonsWithPlatforms.push({
-          platforms: result.platforms,
-          reasons: result.reasons,
-          count: result.count,
+          platforms: totalReasons[j].platforms,
+          reasons: totalReasons[j].reasons,
+          count: totalReasons[i].count,
         });
-      });
-    });
+      }
+    }
 
     return {
       surveytotal,
@@ -81,15 +84,11 @@ export async function selectSurveyData() {
       reasonsWithPlatforms,
     };
   } catch (error) {
-    if (error instanceof MysqlError) {
-      throw new MysqlError("[SURVEY]", "MYSQL ERROR", error.message);
-    }
-
-    if (error instanceof Error) {
-      throw new MysqlError("[SURVEY]", "NOT MYSQL ERROR", error.message);
-    }
-
-    throw new MysqlError("[SURVEY]", "UNHANDABLE ERROR", JSON.stringify(error));
+    throw new SurveyError(
+      "[SURVEY]",
+      "UNHANDABLE ERROR",
+      error instanceof Error ? error : new Error(JSON.stringify(error))
+    );
   }
 }
 
@@ -102,14 +101,10 @@ export async function getSurveyData(
     // 데이터 DB에 저장
     await surveyDataInput(age, platforms, reasons);
   } catch (error) {
-    if (error instanceof MysqlError) {
-      throw new MysqlError("[SURVEY]", "MYSQL ERROR", error.message);
-    }
-
-    if (error instanceof Error) {
-      throw new MysqlError("[SURVEY]", "NOT MYSQL ERROR", error.message);
-    }
-
-    throw new MysqlError("[SURVEY]", "UNHANDABLE ERROR", JSON.stringify(error));
+    throw new SurveyError(
+      "[SURVEY]",
+      "UNHANDABLE ERROR",
+      error instanceof Error ? error : new Error(JSON.stringify(error))
+    );
   }
 }
