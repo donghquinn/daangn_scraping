@@ -12,11 +12,11 @@ services:
       - ./.env
     volumes:
       - ./scrape-logs:/app/src/logs
-#     networks:
-#       - proxy
-#       - wordpress
-# networks:
-#   proxy:
-#     external: true
-#   wordpress:
-#     external: true
+    networks:
+      - proxy
+      - wordpress
+networks:
+  proxy:
+    external: true
+  wordpress:
+    external: true
