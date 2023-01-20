@@ -1,7 +1,7 @@
 import { getHtml } from "./getHtml";
 import { text, load } from "cheerio";
-import { Logger } from "utils";
 import axios from "axios";
+import { Logger } from "utils/logger.utils";
 
 // 지역 정보 스크레이핑
 export async function parseRegion() {
@@ -19,7 +19,7 @@ export async function parseRegion() {
 
     // .children("article.card-top")
     // .children("card-desc");
-    const region = $bodyList
+    $bodyList
       .children("div.card-region-name")
       .text()
       .split("\n")
