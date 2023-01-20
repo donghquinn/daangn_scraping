@@ -1,7 +1,7 @@
 import { insertUrlAndRegion } from "queries/insertQueryData";
-import { Logger } from "utils";
 import { Mysql } from "./database/Mysql.lib";
 import { parseCategory, parseRegion, parseUrl } from "./parse";
+import { Logger } from "utils/logger.utils";
 
 export class Scraping {
   private static instance: Scraping;
