@@ -40,7 +40,7 @@ yarn run build
 
 ## 구동 명령
 
-yarn run dev
+yarn run start
 
 ## 도커를 이용한 구동
 
