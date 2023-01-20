@@ -1,3 +1,5 @@
+import "./env";
+
 import { Scraping } from "libraries";
 import { KoaRouter } from "server";
 
