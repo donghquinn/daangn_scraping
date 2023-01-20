@@ -1709,7 +1709,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"koa@npm:^2.13.4":
+"koa@npm:^2.14.1":
   version: 2.14.1
   resolution: "koa@npm:2.14.1"
   dependencies:
@@ -2403,7 +2403,7 @@ __metadata:
     htmlparser2: ^8.0.1
     http: ^0.0.1-security
     joi: ^17.7.0
-    koa: ^2.13.4
+    koa: ^2.14.1
     koa-bodyparser: ^4.3.0
     koa-cors: ^0.0.16
     koa-helmet: ^6.1.0
