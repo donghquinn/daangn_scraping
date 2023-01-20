@@ -1,6 +1,6 @@
 import { Context } from "koa";
 import { Mysql } from "libraries/database";
-import { setErrorResponse, setResponse } from "libraries/request.lib";
+import { setErrorResponse, setResponse } from "utils/request.lib";
 import { selectCombined, selectTotalCount } from "queries/select-data";
 import { GetCombined, TotalCounts } from "types/sql.types";
 import { Logger } from "utils";
