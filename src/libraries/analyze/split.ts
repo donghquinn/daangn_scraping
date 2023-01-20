@@ -25,7 +25,7 @@ export class DataAnalyze {
       Logger.info("[DATA_QUERY] Found Data");
 
       if (!result) {
-        setErrorResponse(ctx, 500, "[No Data Result Found]");
+        throw new Error("[GET_ALL_DATA]");
       }
 
       // this.resultArray.push(...result);
