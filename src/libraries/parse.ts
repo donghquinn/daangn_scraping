@@ -2,6 +2,7 @@ import { getHtml } from "./getHtml";
 import { text, load } from "cheerio";
 import axios from "axios";
 import { Logger } from "utils/logger.utils";
+import { ParseError } from "error/parse.error";
 
 // 지역 정보 스크레이핑
 export async function parseRegion() {
@@ -57,22 +58,24 @@ export async function parseUrl() {
 
     const $href = $(".card-link");
 
-    const url = $href.map((index, data) => {
-      const href = data.attribs.href.split("=");
+    for (let i = 0; i < $href.length; i += 1) {
+      const href = $href[i].attribs.href.split("=");
       const link = href[href.length - 1];
 
       const uri = "https://www.daangn.com" + link.trim();
 
       urlArray.push(uri);
-    });
+    }
 
     Logger.info(`[URL_SCRAPER] Found ${urlArray.length}`);
 
     return urlArray;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(`[URL_SCRAPER] URL Scraping Error: ${error.message}`);
-    }
+    throw new ParseError(
+      `[URL_SCRAPER] `,
+      "URL Scraping Error",
+      error instanceof Error ? error : new Error(JSON.stringify(error))
+    );
   }
 }
 

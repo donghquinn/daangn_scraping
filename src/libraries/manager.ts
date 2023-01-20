@@ -2,6 +2,7 @@ import { insertUrlAndRegion } from "queries/insertQueryData";
 import { Mysql } from "./database/Mysql.lib";
 import { parseCategory, parseRegion, parseUrl } from "./parse";
 import { Logger } from "utils/logger.utils";
+import { CommonError } from "error/common.error";
 
 export class Scraping {
   private static instance: Scraping;
@@ -33,15 +34,15 @@ export class Scraping {
       const category = await parseCategory();
 
       if (!region) {
-        throw new Error("[SCRAPER] Could not Scrape Region Data");
+        throw new CommonError("[SCRAPER]", "Could not Scrape Region Data");
       }
 
       if (!url) {
-        throw new Error("[SCRAPER] Could not Scrape Url Data");
+        throw new CommonError("[SCRAPER]", "Could not Scrape Url Data");
       }
 
       if (!category) {
-        throw new Error("[SCRAPER] Could Not Scrape Category Data");
+        throw new CommonError("[SCRAPER]", "Could Not Scrape Category Data");
       }
 
       // if (region.length !== url.length) {
