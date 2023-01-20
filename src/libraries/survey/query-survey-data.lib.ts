@@ -40,14 +40,14 @@ export async function selectSurveyData() {
     );
 
     // 전체 나이대 카운트
-    ageArray.filter(async (ages) => {
+    for (let i = 0; i < ageArray.length; i += 1) {
       const { count } = await Mysql.query<SurveyQueryCount>(
         selectTotalAgeCount,
-        [ages]
+        [ageArray[i]]
       );
 
-      returnObject[ages] = count;
-    });
+      returnObject[ageArray[i]] = count;
+    }
 
     // 플랫폼별 카운트 개수. 기타 부분에 어떤게 들어갔을지 모르므로 그룹화 사용
     const [...totalPlatform] = await Mysql.query<SurveyPlatformsQuery[]>(
