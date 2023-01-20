@@ -6,7 +6,7 @@
     "build": "NODE_ENV=production tsc --project tsconfig.json --diagnostics -p tsconfig.json"
   },
   "type": "module",
-  "author": "donghquinn",
+  "author": "Kim Dong Hyun",
   "license": "MIT",
   "dependencies": {
     "axios": "^1.1.2",

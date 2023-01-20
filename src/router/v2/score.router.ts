@@ -1,8 +1,8 @@
 import { Context, DefaultState } from "koa";
 import Router from "koa-router";
-import { getCategoryScore } from "libraries/analyze/getCategoryData";
-import { getRegionScore } from "libraries/analyze/getRegionData";
-import { getRecommendation } from "libraries/analyze/getRecommendation";
+import { getCategoryScore } from "controllers/analyze/getCategoryData.controller";
+import { getRegionScore } from "controllers/analyze/getRegionData.controller";
+import { getRecommendation } from "controllers/analyze/getRecommendation.controller";
 
 const scoreRouter = new Router<DefaultState, Context>({
   prefix: "/score",

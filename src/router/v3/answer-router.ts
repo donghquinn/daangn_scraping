@@ -1,6 +1,6 @@
 import { DefaultContext, DefaultState, Next } from "koa";
 import Router from "koa-router";
-import { surveyControl } from "libraries/survey.lib";
+import { surveyControl } from "controllers/servey/survey.controller";
 
 const surveyRouter = new Router<DefaultState, DefaultContext>();
 
