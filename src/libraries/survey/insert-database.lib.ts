@@ -1,7 +1,7 @@
 import { MysqlError } from "error/mysql.error";
 import { Mysql } from "libraries/database";
 import { insertSurveyAnswer } from "queries/insertQueryData";
-import { Logger } from "utils";
+import { Logger } from "utils/logger.utils";
 
 export async function surveyDataInput(
   age: string,

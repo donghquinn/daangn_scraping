@@ -1,0 +1,17 @@
+2023-01-21 02:41:39 error: [DATABASE] error: Error: getaddrinfo ENOTFOUND mariadb
+    at PromisePool.query (/app/node_modules/mysql2/promise.js:341:22)
+    at Function.query (file:///app/src/libraries/database/Mysql.lib.ts:58:35)
+    at Timeout._onTimeout (file:///app/src/libraries/manager.ts:51:21)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  [stack]: 'Error: getaddrinfo ENOTFOUND mariadb\n' +
+    '    at PromisePool.query (/app/node_modules/mysql2/promise.js:341:22)\n' +
+    '    at Function.query (file:///app/src/libraries/database/Mysql.lib.ts:58:35)\n' +
+    '    at Timeout._onTimeout (file:///app/src/libraries/manager.ts:51:21)\n' +
+    '    at processTicksAndRejections (node:internal/process/task_queues:95:5)',
+  message: 'getaddrinfo ENOTFOUND mariadb',
+  code: 'ENOTFOUND',
+  errno: -3008,
+  sql: undefined,
+  sqlState: undefined,
+  sqlMessage: undefined
+}

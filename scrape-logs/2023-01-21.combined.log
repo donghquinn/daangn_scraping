@@ -1,0 +1,35 @@
+2023-01-21 02:40:23 info: [SCRAPER] Scraping Start: Sat Jan 21 2023 02:40:23 GMT+0900 (Korean Standard Time)
+2023-01-21 02:40:23 info: @@@@@@@@@@@@@@@@@@@@@@@@@@@
+2023-01-21 02:40:23 info: [SERVER] 'Server is Listening on 7000'
+2023-01-21 02:40:23 info: @@@@@@@@@@@@@@@@@@@@@@@@@@@
+2023-01-21 02:41:04 info: [SCRAPER] Scraping Start: Sat Jan 21 2023 02:41:04 GMT+0900 (Korean Standard Time)
+2023-01-21 02:41:04 info: @@@@@@@@@@@@@@@@@@@@@@@@@@@
+2023-01-21 02:41:04 info: [SERVER] 'Server is Listening on 7000'
+2023-01-21 02:41:04 info: @@@@@@@@@@@@@@@@@@@@@@@@@@@
+2023-01-21 02:41:15 info: [URL_SCRAPER] Found 85
+2023-01-21 02:41:17 info: [REGION_SCRPAER] FOUND Regions: 85
+2023-01-21 02:41:18 info: [URL_SCRAPER] Found 85
+2023-01-21 02:41:25 info: [URL_SCRAPER] Found 85
+2023-01-21 02:41:26 info: [REGION_SCRPAER] FOUND Regions: 85
+2023-01-21 02:41:27 info: [URL_SCRAPER] Found 85
+2023-01-21 02:41:35 info: [URL_SCRAPER] Found 85
+2023-01-21 02:41:36 info: [REGION_SCRPAER] FOUND Regions: 85
+2023-01-21 02:41:38 info: [URL_SCRAPER] Found 85
+2023-01-21 02:41:39 info: [CATEGORY_SCRAPER] Found Categories: 84
+2023-01-21 02:41:39 error: [DATABASE] error: Error: getaddrinfo ENOTFOUND mariadb
+    at PromisePool.query (/app/node_modules/mysql2/promise.js:341:22)
+    at Function.query (file:///app/src/libraries/database/Mysql.lib.ts:58:35)
+    at Timeout._onTimeout (file:///app/src/libraries/manager.ts:51:21)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  [stack]: 'Error: getaddrinfo ENOTFOUND mariadb\n' +
+    '    at PromisePool.query (/app/node_modules/mysql2/promise.js:341:22)\n' +
+    '    at Function.query (file:///app/src/libraries/database/Mysql.lib.ts:58:35)\n' +
+    '    at Timeout._onTimeout (file:///app/src/libraries/manager.ts:51:21)\n' +
+    '    at processTicksAndRejections (node:internal/process/task_queues:95:5)',
+  message: 'getaddrinfo ENOTFOUND mariadb',
+  code: 'ENOTFOUND',
+  errno: -3008,
+  sql: undefined,
+  sqlState: undefined,
+  sqlMessage: undefined
+}
