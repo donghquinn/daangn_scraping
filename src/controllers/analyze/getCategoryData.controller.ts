@@ -22,17 +22,17 @@ export async function getCategoryScore(ctx: Context) {
 
     Logger.info("[Region_Score] Queried Data : %o", category);
 
-    category.find((item) => {
-      const categoryList = item.category;
+    for (let i = 0; i < category.length; i += 1) {
+      const categoryList = category[i].category;
 
       if (returnData[categoryList]) {
-        returnData[categoryList] = returnData[categoryList] + 1;
+        returnData[categoryList] += 1;
       }
 
       if (!returnData[categoryList]) {
         returnData[categoryList] = 1;
       }
-    });
+    }
 
     // TODO 위에서 동적으로 생성한 객체의 value값을 기준으로 내림차순...
 

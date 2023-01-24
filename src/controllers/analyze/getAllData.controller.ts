@@ -1,4 +1,3 @@
-import { AnalyzeError } from "error/analyze.error";
 import { Context } from "koa";
 import { Mysql } from "libraries/database";
 import { selectCombined } from "queries/select-data";
