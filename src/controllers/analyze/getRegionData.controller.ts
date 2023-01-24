@@ -20,17 +20,17 @@ export async function getRegionScore(ctx: Context) {
 
     const [...region] = await Mysql.query<GetRegion[]>(selectRegion);
 
-    region.find((item) => {
-      const splittedRegion = item.region.split(" ")[1];
+    for (let i = 0; i < region.length; i += 1) {
+      const splittedRegion = region[i].region.split(" ")[1];
 
       if (returnData[splittedRegion]) {
-        returnData[splittedRegion] = returnData[splittedRegion] + 1;
+        returnData[splittedRegion] += 1;
       }
 
       if (!returnData[splittedRegion]) {
         returnData[splittedRegion] = 1;
       }
-    });
+    }
 
     // TODO 위에서 동적으로 생성한 객체의 value값을 기준으로 내림차순...
 

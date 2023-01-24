@@ -1,8 +1,8 @@
-import { getHtml } from "./getHtml";
-import { text, load } from "cheerio";
 import axios from "axios";
-import { Logger } from "utils/logger.utils";
+import { load } from "cheerio";
 import { ParseError } from "error/parse.error";
+import { Logger } from "utils/logger.utils";
+import { getHtml } from "./getHtml";
 
 // 지역 정보 스크레이핑
 export async function parseRegion() {
@@ -11,7 +11,7 @@ export async function parseRegion() {
   const html = await getHtml();
 
   if (!html) {
-    throw new Error("No Html");
+    throw new ParseError("Parse Error", "No Html");
   }
 
   try {
@@ -45,7 +45,7 @@ export async function parseRegion() {
 
 // URL 정보 스크레이핑
 export async function parseUrl() {
-  let urlArray: Array<string> = [];
+  const urlArray: Array<string> = [];
 
   const html = await getHtml();
 
@@ -60,6 +60,7 @@ export async function parseUrl() {
 
     for (let i = 0; i < $href.length; i += 1) {
       const href = $href[i].attribs.href.split("=");
+
       const link = href[href.length - 1];
 
       const uri = "https://www.daangn.com" + link.trim();
