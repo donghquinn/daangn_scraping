@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import axios from "axios";
 import { load } from "cheerio";
 import { ParseError } from "error/parse.error";
-import { Logger } from "utils/logger.utils";
+import { CrawlLogger, Logger } from "utils/logger.utils";
 import { getHtml } from "./getHtml";
 
 // 지역 정보 스크레이핑
@@ -32,14 +33,16 @@ export async function parseRegion() {
         }
       });
 
-    Logger.info(`[REGION_SCRPAER] FOUND Regions: ${regionArray.length}`);
+    CrawlLogger.info(`[REGION_SCRPAER] FOUND Regions: ${regionArray.length}`);
     // console.log(regionArray);
 
     return regionArray;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(`[REGION_SCRAPER] Scraping Error :${error.message}`);
-    }
+    throw new ParseError(
+      `[REGION_SCRAPER]`,
+      ` Scraping Error `,
+      error instanceof Error ? error : new Error(JSON.stringify(error))
+    );
   }
 }
 
@@ -63,7 +66,7 @@ export async function parseUrl() {
 
       const link = href[href.length - 1];
 
-      const uri = "https://www.daangn.com" + link.trim();
+      const uri = `https://www.daangn.com${link.trim()}`;
 
       urlArray.push(uri);
     }
