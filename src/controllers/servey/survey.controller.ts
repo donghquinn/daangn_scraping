@@ -1,11 +1,11 @@
 import { DefaultContext } from "koa";
+import { Logger } from "utils/logger.utils";
 import { surveyAnswerValidate } from "utils/survey-answer.validator";
 import {
   getSurveyData,
   selectSurveyData,
 } from "../../libraries/survey/query-survey-data.lib";
 import { setErrorResponse, setResponse } from "../../utils/request.lib";
-import { Logger } from "utils/logger.utils";
 
 export async function surveyControl(ctx: DefaultContext) {
   try {

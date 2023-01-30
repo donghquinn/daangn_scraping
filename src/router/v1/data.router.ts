@@ -10,8 +10,8 @@ dataRouter.get("/data", authHeader, async (ctx) => {
   await getAllDataController(ctx);
 });
 
-dataRouter.get("/count", authHeader, (ctx) => {
-  getTotalCountController(ctx);
+dataRouter.get("/count", authHeader, async (ctx) => {
+  await getTotalCountController(ctx);
 });
 
 export { dataRouter };
