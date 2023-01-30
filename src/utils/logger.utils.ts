@@ -27,6 +27,8 @@ class WinstonLogger {
 
   private commonLogger: Winston.Logger;
 
+  private crawlingLogger: Winston.Logger;
+
   private logger: Winston.Logger;
 
   private constructor() {
@@ -43,6 +45,25 @@ class WinstonLogger {
           datePattern: "YYYY-MM-DD",
           dirname: dirSaveName,
           filename: "%DATE%.common.log",
+          maxFiles: 30,
+          zippedArchive: true,
+        }),
+      ],
+    });
+
+    this.crawlingLogger = Winston.createLogger({
+      format: combine(
+        splat(),
+        json(),
+        defaultTimestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+        formatted
+      ),
+      transports: [
+        new WinstonDaily({
+          level: "debug",
+          datePattern: "YYYY-MM-DD",
+          dirname: dirSaveName,
+          filename: "%DATE%.crawl.log",
           maxFiles: 30,
           zippedArchive: true,
         }),
@@ -93,10 +114,11 @@ class WinstonLogger {
     return {
       CommonLogger: this.instance.commonLogger,
       Logger: this.instance.logger,
+      CrawlLogger: this.instance.crawlingLogger,
     };
   }
 }
 
-const { CommonLogger, Logger } = WinstonLogger.getInstance();
+const { CommonLogger, Logger, CrawlLogger } = WinstonLogger.getInstance();
 
-export { CommonLogger, Logger };
+export { CommonLogger, Logger, CrawlLogger };
