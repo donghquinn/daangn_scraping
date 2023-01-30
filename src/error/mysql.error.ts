@@ -1,13 +1,11 @@
 export class MysqlError extends Error {
   type: string;
 
-  code: string;
-
-  constructor(type: string, code: string, message: string) {
+  constructor(type: string, message: string, cause?: Error) {
     super(message);
 
     this.name = "MysqlError";
     this.type = type;
-    this.code = code;
+    this.cause = cause;
   }
 }

@@ -5,6 +5,7 @@ import WinstonDaily from "winston-daily-rotate-file";
 
 const fileName = fileURLToPath(import.meta.url);
 const dirName = path.dirname(fileName);
+const dirSaveName = path.join(dirName, "..", "..", "logs");
 
 // 로그 포맷 설정
 const {
@@ -17,18 +18,19 @@ const {
 } = Winston.format;
 
 const formatted = printf(
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   ({ level, message, timestamp }) => `${timestamp} ${level}: ${message}`
 );
 
 class WinstonLogger {
   private static instance: WinstonLogger;
 
-  private parseLogger: Winston.Logger;
+  private commonLogger: Winston.Logger;
 
   private logger: Winston.Logger;
 
   private constructor() {
-    this.parseLogger = Winston.createLogger({
+    this.commonLogger = Winston.createLogger({
       format: combine(
         splat(),
         json(),
@@ -39,8 +41,8 @@ class WinstonLogger {
         new WinstonDaily({
           level: "debug",
           datePattern: "YYYY-MM-DD",
-          dirname: path.join(dirName, "..", "logs"),
-          filename: "%DATE%.parser.log",
+          dirname: dirSaveName,
+          filename: "%DATE%.common.log",
           maxFiles: 30,
           zippedArchive: true,
         }),
@@ -58,7 +60,7 @@ class WinstonLogger {
         new WinstonDaily({
           level: "error",
           datePattern: "YYYY-MM-DD",
-          dirname: path.join(dirName, "..", "logs"),
+          dirname: dirSaveName,
           filename: "%DATE%.error.log",
           maxFiles: 100,
           zippedArchive: true,
@@ -66,7 +68,7 @@ class WinstonLogger {
         new WinstonDaily({
           level: process.env.NODE_ENV === "production" ? "info" : "debug",
           datePattern: "YYYY-MM-DD",
-          dirname: path.join(dirName, "..", "logs"),
+          dirname: dirSaveName,
           filename: "%DATE%.combined.log",
           maxFiles: 100,
           zippedArchive: true,
@@ -89,12 +91,12 @@ class WinstonLogger {
     }
 
     return {
-      ParseLogger: this.instance.parseLogger,
+      CommonLogger: this.instance.commonLogger,
       Logger: this.instance.logger,
     };
   }
 }
 
-const { ParseLogger, Logger } = WinstonLogger.getInstance();
+const { CommonLogger, Logger } = WinstonLogger.getInstance();
 
-export { ParseLogger, Logger };
+export { CommonLogger, Logger };
