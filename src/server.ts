@@ -1,13 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Server } from "http";
 import Koa from "koa";
+import bodyparser from "koa-bodyparser";
 import cors from "koa-cors";
 import helmet from "koa-helmet";
 import json from "koa-json";
-import bodyparser from "koa-bodyparser";
+import logger from "koa-logger";
 import { routerV1 } from "router/v1";
 import { routerV2 } from "router/v2";
 import { routerV3 } from "router/v3";
-import { Logger } from "utils/logger.utils";
+import { ApiLogger, Logger } from "utils/logger.utils";
 
 export class KoaRouter {
   private port: number;
@@ -29,6 +31,7 @@ export class KoaRouter {
     this.koa.use(helmet());
     this.koa.use(cors());
     this.koa.use(bodyparser());
+    this.koa.use(logger((str) => ApiLogger.info("[MAIN]: %o", str)));
     // this.koa.use(authHeader);
     this.koa.use(routerV1.routes());
     this.koa.use(routerV1.allowedMethods());
@@ -50,7 +53,9 @@ export class KoaRouter {
         Logger.info("[SERVER] %o", message);
         Logger.info(charRepeat);
       });
+
+      return;
     }
-    return;
+    Logger.info("[KOA] Server Already Started: Ignored");
   }
 }
