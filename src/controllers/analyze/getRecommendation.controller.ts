@@ -16,11 +16,6 @@ export async function getRecommendation(ctx: Context) {
   // const regionData: RegionScoreObject = {};
 
   try {
-    // const [regionResult] = await Mysql.query<GetRegion[]>(selectRegionLists);
-    // const [categoryResult] = await Mysql.query<GetCategory[]>(
-    //   selectCategoryList
-    // );
-
     const categoryPerRegion = await Mysql.query<CategoryPerRegion>(
       queryCategoriesPerRegion
     );
