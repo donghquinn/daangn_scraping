@@ -31,7 +31,10 @@ V2는 각각 점수들에 대한 통계를 낸 API. 가장 많은 지역과 카�
 - DB_PASS= DB 유저 비밀번호
 - DB_USER: DB 유저 이름
 - TABLE: 스크레이핑 한 데이터 저장 테이블 이름
+
 - NODE_ENV: 구동 환경 ( development | production)
+- APP_PORT: 구동 포트
+
 - TIME_SET: 데이터를 스크레이핑 할 주기 선택
 
 ## 빌드
