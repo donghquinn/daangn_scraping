@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { Sql } from "types/sql.types";
 
 export const selectTotalCount: Sql = `

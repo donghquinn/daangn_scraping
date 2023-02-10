@@ -51,7 +51,6 @@ export class Mysql {
       if (!isListening)
         throw new MysqlError(
           "DB_CLOSED_ERROR",
-          "DB_CLOSED",
           "Tried to query after DB closed"
         );
 
@@ -61,19 +60,11 @@ export class Mysql {
     } catch (error) {
       Logger.error("[DATABASE] error: %o", error);
 
-      if (error instanceof MysqlError) {
-        throw new MysqlError("DB_QUERY_ERROR", error.code, error.message);
-      }
-
-      if (error instanceof Error) {
-        throw new MysqlError("DB_OTHER_ERROR", "UNHANDLED", error.message);
-      }
-
       // 에러 객체가 아닌 상태로 throw 된 경우
       throw new MysqlError(
         "DB_OTHER_ERROR",
         "THIS_IS_BUG",
-        JSON.stringify(error)
+        error instanceof Error ? error : new Error(JSON.stringify(error))
       );
     }
   }

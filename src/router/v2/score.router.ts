@@ -9,8 +9,16 @@ const scoreRouter = new Router<DefaultState, Context>({
   prefix: "/score",
 });
 
-scoreRouter.get("/region", authHeader, (ctx) => getRegionScore(ctx));
-scoreRouter.get("/category", authHeader, (ctx) => getCategoryScore(ctx));
-scoreRouter.get("/select", authHeader, (ctx) => getRecommendation(ctx));
+scoreRouter.get("/region", authHeader, async (ctx) => {
+  await getRegionScore(ctx);
+});
+
+scoreRouter.get("/category", authHeader, async (ctx) => {
+  await getCategoryScore(ctx);
+});
+
+scoreRouter.get("/select", authHeader, async (ctx) => {
+  await getRecommendation(ctx);
+});
 
 export { scoreRouter };

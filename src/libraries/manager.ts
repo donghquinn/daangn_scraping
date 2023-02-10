@@ -1,8 +1,9 @@
+import { CommonError } from "error/common.error";
 import { insertUrlAndRegion } from "queries/insertQueryData";
+import { setIntervalAsync } from "set-interval-async";
+import { Logger } from "utils/logger.utils";
 import { Mysql } from "./database/Mysql.lib";
 import { parseCategory, parseRegion, parseUrl } from "./parse";
-import { Logger } from "utils/logger.utils";
-import { CommonError } from "error/common.error";
 
 export class Scraping {
   private static instance: Scraping;
@@ -24,11 +25,13 @@ export class Scraping {
   start() {
     if (!this.isStarted) {
       Logger.info("[Scraper] Is Not Listening");
+
+      return;
     }
 
-    Logger.info("[SCRAPER] Scraping Start: " + Date());
+    Logger.info(`[SCRAPER] Scraping Start: ${Date()}`);
 
-    setInterval(async () => {
+    setIntervalAsync(async () => {
       const url = await parseUrl();
       const region = await parseRegion();
       const category = await parseCategory();
