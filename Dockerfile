@@ -1,15 +1,24 @@
-FROM node:18-alpine
+#
+# --- base image ---
+FROM node:18.12.1-alpine3.17 as base
 
-RUN apk --no-cache add tzdata && \
+# install curl/timezone
+RUN apk --no-cache add curl tzdata && \
   cp /usr/share/zoneinfo/Asia/Seoul /etc/localtime && \
   echo "Asia/Seoul" > /etc/timezone
 
-ADD . /app
+# set workdir
+WORKDIR /home/node
 
-WORKDIR /app
+# copy package.json, package-lock.json into image
+COPY yarn.lock ./
+
+
+# --- release ---
+FROM base AS release
+
+COPY . .
 
 RUN yarn install
 
-RUN yarn run build
-
-CMD ["yarn","start"]
+ENTRYPOINT ["yarn", "start"]

@@ -11,7 +11,7 @@ import { routerV2 } from "router/v2";
 import { routerV3 } from "router/v3";
 import { ApiLogger, Logger } from "utils/logger.utils";
 
-export class KoaRouter {
+export class KoaServer {
   private port: number;
 
   private server: Server | null;
