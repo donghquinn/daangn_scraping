@@ -1,4 +1,4 @@
-import { DefaultContext } from "koa";
+import { DefaultCtx } from "types/request.types";
 import { Logger } from "utils/logger.utils";
 import { surveyAnswerValidate } from "utils/survey-answer.validator";
 import {
@@ -7,7 +7,7 @@ import {
 } from "../../libraries/survey/query-survey-data.lib";
 import { setErrorResponse, setResponse } from "../../utils/request.lib";
 
-export async function surveyControl(ctx: DefaultContext) {
+export async function surveyControl(ctx: DefaultCtx) {
   try {
     Logger.info("[SURVEY] Validate Start");
 

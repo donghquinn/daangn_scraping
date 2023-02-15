@@ -1,12 +1,14 @@
 import "./env";
 
-import { Scraping } from "libraries/manager";
-import { KoaRouter } from "server";
+const bootstrap = async () => {
+  const { Scraping } = await import("libraries/manager");
+  const { KoaServer } = await import("./server");
 
-// await parseRegion();
-// // await parseUrl();
-const scrape = Scraping.getInstance();
-const server = new KoaRouter();
+  const scrape = Scraping.getInstance();
+  const server = new KoaServer();
 
-server.start();
-scrape.start();
+  server.start();
+  scrape.start();
+};
+
+await bootstrap();
