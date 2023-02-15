@@ -2,7 +2,7 @@ import { MysqlError } from "error/mysql.error";
 import { createPool, Pool } from "mysql2/promise";
 import { DbQueryResult } from "types/query.types";
 import { Sql } from "types/sql.types";
-import { CommonLogger, Logger } from "utils/logger.utils";
+import { DatabaseLogger, Logger } from "utils/logger.utils";
 
 /**
  * 데이터베이스 관련 조작 클래스
@@ -48,17 +48,20 @@ export class Mysql {
     try {
       const { pool, isListening } = Mysql.getInstance();
 
-      if (!isListening)
+      if (!isListening) {
+        DatabaseLogger.error("Database: Db Closed Error");
+
         throw new MysqlError(
           "DB_CLOSED_ERROR",
           "Tried to query after DB closed"
         );
+      }
 
       const [result] = await pool.query<DbQueryResult<T>>(sql, options);
 
       return result;
     } catch (error) {
-      CommonLogger.error("[DATABASE] error: %o", {
+      DatabaseLogger.error("[DATABASE] error: %o", {
         error:
           error instanceof Error ? error : new Error(JSON.stringify(error)),
       });
