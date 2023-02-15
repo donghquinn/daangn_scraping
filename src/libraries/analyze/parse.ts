@@ -2,7 +2,7 @@
 import axios from "axios";
 import { load } from "cheerio";
 import { ParseError } from "error/parse.error";
-import { CrawlLogger, Logger } from "utils/logger.utils";
+import { CrawlLogger } from "utils/logger.utils";
 import { getHtml } from "./getHtml";
 
 // 지역 정보 스크레이핑
@@ -12,6 +12,8 @@ export async function parseRegion() {
   const html = await getHtml();
 
   if (!html) {
+    CrawlLogger.error("No Html provieded. Ignore.");
+
     throw new ParseError("Parse Error", "No Html");
   }
 
@@ -38,10 +40,13 @@ export async function parseRegion() {
       });
 
     CrawlLogger.info(`[REGION_SCRPAER] FOUND Regions: ${regionArray.length}`);
-    // console.log(regionArray);
 
     return regionArray;
   } catch (error) {
+    CrawlLogger.error("Scraping Error: %o", {
+      error: error instanceof Error ? error : new Error(JSON.stringify(error)),
+    });
+
     throw new ParseError(
       `[REGION_SCRAPER]`,
       ` Scraping Error `,
@@ -57,7 +62,9 @@ export async function parseUrl() {
   const html = await getHtml();
 
   if (!html) {
-    throw new Error("No Html");
+    CrawlLogger.error("Parsing Url Error: No Html Provided. Ignore.");
+
+    throw new ParseError("Parse Error", "No Html Provided");
   }
 
   try {
@@ -75,10 +82,14 @@ export async function parseUrl() {
       urlArray.push(uri);
     }
 
-    Logger.info(`[URL_SCRAPER] Found ${urlArray.length}`);
+    CrawlLogger.info(`[URL_SCRAPER] Found ${urlArray.length}`);
 
     return urlArray;
   } catch (error) {
+    CrawlLogger.error("URL Scraping Error: %o", {
+      error: error instanceof Error ? error : new Error(JSON.stringify(error)),
+    });
+
     throw new ParseError(
       `[URL_SCRAPER] `,
       "URL Scraping Error",
@@ -94,7 +105,9 @@ export async function parseCategory() {
   const url = await parseUrl();
 
   if (!url) {
-    throw new Error("[CATEGORY] No Url Found Here. Ignored");
+    CrawlLogger.error("Category Parsing: No Url Priveded. Ignored.");
+
+    throw new ParseError("[CATEGORY]", "No Url Found Here. Ignored");
   }
 
   try {
@@ -108,7 +121,7 @@ export async function parseCategory() {
       // Logger.info(`${category}`);
 
       if (!category) {
-        Logger.debug("[CATEGORY] No Category Found");
+        CrawlLogger.debug("[CATEGORY] No Category Found");
       }
 
       const categoryData = category.trim();
@@ -117,10 +130,16 @@ export async function parseCategory() {
       categoryArray.push(categoryData);
     }
 
-    Logger.info(`[CATEGORY_SCRAPER] Found Categories: ${categoryArray.length}`);
+    CrawlLogger.info(
+      `[CATEGORY_SCRAPER] Found Categories: ${categoryArray.length}`
+    );
 
     return categoryArray;
   } catch (error) {
+    CrawlLogger.error("Category Scraper Error: %o", {
+      error: error instanceof Error ? error : new Error(JSON.stringify(error)),
+    });
+
     throw new ParseError(
       `[CATEGORY_SCRAPER] `,
       `Category Scraping Error`,
@@ -128,29 +147,3 @@ export async function parseCategory() {
     );
   }
 }
-
-// const category = url.find(async (uri) => {
-//   try {
-//     const html = await axios.get(uri);
-
-//     const $ = load(html.data);
-
-//     const category = $("p[id='article-category']").text()
-
-//     if (!category) {
-//       Logger.debug("[CATEGORY] No Category Found");
-//     }
-
-//     Logger.info("[CATEGORY] Category Found");
-
-//     Logger.info(`[CATERGORY] ${category}`);
-//     categoryArray.push(category);
-// } catch (error) {
-//   if (error instanceof Error) {
-//     throw new Error("CATEGORY Error");
-// //   }
-//     // }
-//   });
-
-//   return categoryArray;
-// }
