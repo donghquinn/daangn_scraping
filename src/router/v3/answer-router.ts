@@ -1,6 +1,6 @@
 import { DefaultContext, DefaultState, Next } from "koa";
 import Router from "koa-router";
-import { surveyControl } from "controllers/servey/survey.controller";
+import { surveyControl } from "controllers/survey/survey.controller";
 import { authHeader } from "middlewares/auth.middleware";
 
 const surveyRouter = new Router<DefaultState, DefaultContext>();

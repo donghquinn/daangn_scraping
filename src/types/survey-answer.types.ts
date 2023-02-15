@@ -17,6 +17,7 @@ export interface SurveyPlatformsQuery {
   count: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export interface totalAgeReturnData {
   [key: string]: string;
 }
