@@ -10,8 +10,16 @@ services:
       - 6079:6079
     env_file:
       - ./.env
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 700M
+        reservations:
+          cpus: '0.15'
+          memory: 300M
     volumes:
-      - ./scrape-logs:/app/src/logs
+      - ./scrape-logs:/hoem/node/logs
     networks:
       - proxy
       - wordpress
