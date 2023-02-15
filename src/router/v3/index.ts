@@ -1,8 +1,9 @@
-import { DefaultContext, DefaultState } from "koa";
+import { DefaultState } from "koa";
 import Router from "koa-router";
+import { DefaultCtx } from "types/request.types";
 import { surveyRouter } from "./answer-router";
 
-const routerV3 = new Router<DefaultState, DefaultContext>({ prefix: "/v3" });
+const routerV3 = new Router<DefaultState, DefaultCtx>({ prefix: "/v3" });
 
 routerV3.use(surveyRouter.routes());
 
