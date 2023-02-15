@@ -1,10 +1,10 @@
-import { Context } from "koa";
 import { Mysql } from "libraries/database";
 import { selectCombined } from "queries/select-data";
+import { DefaultCtx } from "types/request.types";
 import { GetCombined } from "types/sql.types";
 import { setErrorResponse, setResponse } from "utils/request.lib";
 
-export async function getAllDataController(ctx: Context) {
+export async function getAllDataController(ctx: DefaultCtx) {
   try {
     const [...result] = await Mysql.query<GetCombined[]>(selectCombined);
 
