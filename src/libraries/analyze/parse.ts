@@ -30,7 +30,11 @@ export async function parseRegion() {
           const regionData = data.trim();
 
           regionArray.push(regionData);
+
+          return regionArray;
         }
+
+        return null;
       });
 
     CrawlLogger.info(`[REGION_SCRPAER] FOUND Regions: ${regionArray.length}`);

@@ -3,7 +3,7 @@ import { insertUrlAndRegion } from "queries/insertQueryData";
 import { setIntervalAsync } from "set-interval-async";
 import { Logger } from "utils/logger.utils";
 import { Mysql } from "./database/Mysql.lib";
-import { parseCategory, parseRegion, parseUrl } from "./parse";
+import { parseCategory, parseRegion, parseUrl } from "./analyze/parse";
 
 export class Scraping {
   private static instance: Scraping;
