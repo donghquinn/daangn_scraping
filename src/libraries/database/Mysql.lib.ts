@@ -2,7 +2,7 @@ import { MysqlError } from "error/mysql.error";
 import { createPool, Pool } from "mysql2/promise";
 import { DbQueryResult } from "types/query.types";
 import { Sql } from "types/sql.types";
-import { Logger } from "utils/logger.utils";
+import { CommonLogger, Logger } from "utils/logger.utils";
 
 /**
  * 데이터베이스 관련 조작 클래스
@@ -58,7 +58,10 @@ export class Mysql {
 
       return result;
     } catch (error) {
-      Logger.error("[DATABASE] error: %o", error);
+      CommonLogger.error("[DATABASE] error: %o", {
+        error:
+          error instanceof Error ? error : new Error(JSON.stringify(error)),
+      });
 
       // 에러 객체가 아닌 상태로 throw 된 경우
       throw new MysqlError(
